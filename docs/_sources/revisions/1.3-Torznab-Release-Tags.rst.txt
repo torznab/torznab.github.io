@@ -1,0 +1,81 @@
+v1.3 - Torznab Release Tags
+===========================
+
+:Status:       **Draft** |torznab|
+:Date:         November 2017
+:Attributions: - Taloth
+
+Summary
+-------
+
+Torrent releases are often classified with specific tags such as internal or freeleech. These tags are indexer specific and should be queryable on the api.
+This revision proposes formalizing an optional `tag` query parameter and related extended attribute allow the client to further filter results.
+
+Release Tags
+------------
+
+Add a `tags` element to the :ref:`capabilities` containing a list of `tag` element with a `name` and `description` for each tag used in the indexer.
+
+.. example::
+
+   .. code-block:: xml
+  
+      <?xml version="1.0" encoding="UTF-8"?>
+      <caps>
+         ...
+
+         <tags>
+            <tag name="anonymous" description="Uploader is anonymous" />
+            <tag name="trusted" description="Uploader has high reputation" />
+            <tag name="internal" description="Uploader is an internal release group" />
+         </tags>
+      </caps>
+
+Clients |SHOULD| not assume the `tags` element to be available in the capabilities.
+
+Clients |MAY| use the `description` to visualize the available tags to the user.
+
+Add the following extended attributes:
+
+.. table::
+   :class: small
+   
+   ====================   =======  =======   =========================================================
+   name                   type     default   description
+   ====================   =======  =======   =========================================================
+   tag                    string             Individual tag. May occur multiple times.
+   ====================   =======  =======   =========================================================
+
+.. TODO:: Incomplete
+
+Known tags
+----------
+
+The following table is an inexhaustive list of the available tags. Services |SHALL| not designate an alternative meaning to these tags.
+
+.. table::
+   :class: small
+   
+   ====================   =========================================================
+   name                   description
+   ====================   =========================================================
+   anonymous              Uploaded by an anonymous user.
+   trusted                Uploader is trusted by the site.
+   internal               Uploaded by a release group internal to the site.
+   ====================   =========================================================
+
+.. TODO:: Consider other tags to be added to this list.
+
+Example
+-------
+
+The release in the api result will have the following attributes:
+
+.. code-block:: xml
+
+   <torznab:attr name="tag" value="internal" />
+   <torznab:attr name="tag" value="freeleech" />
+
+Adoption
+--------
+

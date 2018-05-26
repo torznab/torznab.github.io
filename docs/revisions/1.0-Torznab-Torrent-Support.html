@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>v1.0 - Torznab Torrent Support &mdash; Torznab Specification 1.3-alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/example.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/tags.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/highlight-xml.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme-override.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Torznab Specification 1.3-alpha documentation" href="../index.html"/>
+        <link rel="up" title="Revisions" href="index.html"/>
+        <link rel="next" title="v1.1 - Newznab supportedParams" href="1.1-Newznab-supportedParams.html"/>
+        <link rel="prev" title="Revisions" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Torznab Specification
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../torznab/index.html">Torznab Specification</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Revisions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">v1.0 - Torznab Torrent Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generic-changes">Generic Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tracker-statistics">Tracker Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#seeding-criteria">Seeding Criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#categories">Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#client-changes">Client Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusions">Conclusions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adoption">Adoption</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="1.1-Newznab-supportedParams.html">v1.1 - Newznab supportedParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.2-Torznab-Download-Upload-Factors.html">v1.2 - Torznab Download/Upload Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.3-Torznab-Release-Tags.html">v1.3 - Torznab Release Tags</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../external/index.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Torznab Specification</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Revisions</a> &raquo;</li>
+        
+      <li>v1.0 - Torznab Torrent Support</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/revisions/1.0-Torznab-Torrent-Support.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="v1-0-torznab-torrent-support">
+<h1>v1.0 - Torznab Torrent Support<a class="headerlink" href="#v1-0-torznab-torrent-support" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status:</th><td class="field-body"><p class="first"><strong>Adopted</strong> <span class="flag">torznab</span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body"><p class="first">March 2015</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Attributions:</th><td class="field-body"><ul class="first last simple">
+<li>jonnyboy <em>(hdaccess/hd4free)</em></li>
+<li>Taloth Saldono <em>(Sonarr)</em></li>
+<li>zone117x <em>(Jackett)</em></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="generic-changes">
+<h2>Generic Changes<a class="headerlink" href="#generic-changes" title="Permalink to this headline">¶</a></h2>
+<div class="longlist docutils container">
+<ol class="arabic">
+<li><p class="first">Services providing torrents should use an RSS <cite>enclosure</cite> with a link to the torrent file or magnet uri.</p>
+<div class="admonition example">
+<p class="first admonition-title">Example</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;https://yoursite.com/download.php?torrent=123&amp;passkey=123456&quot;</span>
+           <span class="na">length=</span><span class="s">&quot;1460985071&quot;</span>
+           <span class="na">type=</span><span class="s">&quot;application/x-bittorrent&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="last highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;magnet:?xt=urn:btih:c12fe1c06bba254a9dc9f519b335aa7c1367a88a&amp;dn&quot;</span>
+           <span class="na">length=</span><span class="s">&quot;1460985071&quot;</span>
+           <span class="na">type=</span><span class="s">&quot;application/x-bittorrent;x-scheme-handler/magnet&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>The torrent download url <em>must</em> not rely on any additional authentication mechanisms.</p>
+<p>The enclosure type <em>must</em> be <cite>application/x-bittorrent</cite> <em>or</em> <cite>application/x-bittorrent;x-scheme-handler/magnet</cite>.</p>
+<p>Multiple enclosures <em>may</em> be provided, clients <em>should</em> select the preferred enclosure.</p>
+<p>The correct definition of the enclosure <cite>length</cite> attribute should have been the size of the .torrent file, however newznab defined it as the length of the usenet download rather than the .nzb size. <br/>
+Therefore the <cite>length</cite> attribute can be either 0, or the .torrent/.nzb file size, or the actual media size.
+Given this ambiguity, services <em>should</em> instead provide the <cite>size</cite> extended attribute with the size of the media. (eg. <code class="code xml docutils literal"><span class="name tag"><span class="pre">&lt;torznab:attr</span></span> <span class="name attribute"><span class="pre">name=</span></span><span class="literal string"><span class="pre">”size”</span></span> <span class="name attribute"><span class="pre">value=</span></span><span class="literal string"><span class="pre">”1460985071”</span></span> <span class="name tag"><span class="pre">/&gt;</span></span></code>)</p>
+</li>
+<li><p class="first">Services <em>may</em> include additional extended attributes in the results:</p>
+<table border="1" class="small docutils" id="id1">
+<caption><span class="caption-text">Generic extended attributes</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="19%" />
+<col width="9%" />
+<col width="10%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">type</th>
+<th class="head">default</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>infohash</td>
+<td>string</td>
+<td><em>none</em></td>
+<td>Torrent infohash as lower-case hexadecimal string.</td>
+</tr>
+<tr class="row-odd"><td>magneturl</td>
+<td>url</td>
+<td><em>none</em></td>
+<td>Magnet uri.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="tracker-statistics">
+<h2>Tracker Statistics<a class="headerlink" href="#tracker-statistics" title="Permalink to this headline">¶</a></h2>
+<div class="longlist docutils container">
+<p>Services <em>may</em> include tracker statistics in the results:</p>
+<table border="1" class="small docutils" id="id2">
+<caption><span class="caption-text">Tracker statistics extended attributes</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="14%" />
+<col width="7%" />
+<col width="8%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">type</th>
+<th class="head">default</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>seeders</td>
+<td>integer</td>
+<td><em>none</em></td>
+<td>Number of active seeders according to the tracker(s).</td>
+</tr>
+<tr class="row-odd"><td>leechers</td>
+<td>integer</td>
+<td><em>none</em></td>
+<td>Number of active leechers (non-seeders) according to the tracker(s).</td>
+</tr>
+<tr class="row-even"><td>peers</td>
+<td>integer</td>
+<td><em>none</em></td>
+<td>Number of active peers (seeders and leechers) according to the tracker(s).</td>
+</tr>
+</tbody>
+</table>
+<p>Services <em>shall</em> omit attributes for which no information is available.</p>
+<p>If multiple trackers are known, the service <em>should</em> calculate <cite>seeders</cite>, <cite>leechers</cite>, <cite>peers</cite> based on the maximum instead of the sum of the statistics provided by individual trackers, this ensures that peers connected to multiple trackers are only counted once.</p>
+</div>
+</div>
+<div class="section" id="seeding-criteria">
+<h2>Seeding Criteria<a class="headerlink" href="#seeding-criteria" title="Permalink to this headline">¶</a></h2>
+<div class="longlist docutils container">
+<p>Services <em>may</em> include seeding criteria in the results:</p>
+<table border="1" class="small docutils" id="id3">
+<caption><span class="caption-text">Seeding criteria extended attributes</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">type</th>
+<th class="head">default</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>seedtype</td>
+<td>string</td>
+<td><cite>either</cite></td>
+<td>Specifies which seed criteria must be met. Possible values are: <cite>ratio</cite>, <cite>seedtime</cite>, <cite>both</cite> or <cite>either</cite>.</td>
+</tr>
+<tr class="row-odd"><td>minimumratio</td>
+<td>decimal</td>
+<td><em>none</em></td>
+<td>Minimum ratio required before the torrent client may stop seeding.</td>
+</tr>
+<tr class="row-even"><td>minimumseedtime</td>
+<td>decimal</td>
+<td><em>none</em></td>
+<td>Minimum time in seconds that the torrent must be actively seeded by the client before it may be stopped.</td>
+</tr>
+</tbody>
+</table>
+<p>Private trackers <em>should</em> include <cite>minimumratio</cite> and <cite>minimumseedtime</cite> to specify the seeding requirements for individual torrents. This allow clients to take corrective action or warn the user if the torrent client seeding settings are incorrect.</p>
+<p>Services <em>shall</em> not include arbitrarily large <cite>minimumratio</cite> and <cite>minimumseedtime</cite> values that do not reflect the trackers actual seeding requirements.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>These two attributes are included to allow a torrent tracker to specify the seeding requirements on a per torrent basis.</p>
+<p>These values should be set to the long term requirements for the torrent. So if it’s freeleech for a decade you could set <cite>minimumratio</cite> to <cite>0.0</cite>, but if it’s only for a day, keep it at <cite>1.0</cite>.</p>
+<p class="last">The idea is that if one of the two criteria is satisfied, the torrent client can put the torrent at a lower priority or stop seeding entirely.</p>
+</div>
+</div>
+</div>
+<div class="section" id="categories">
+<h2>Categories<a class="headerlink" href="#categories" title="Permalink to this headline">¶</a></h2>
+<p>Torrent trackers usually have existing categories for their RSS feeds, often starting at <cite>1</cite>, howerver these categories conflict with the default categories defined by newznab. <br/>
+newznab defines categories starting at <cite>100000</cite> as custom site-specific categories. Therefore services <em>should</em> map their internal categories to that range.</p>
+<p>Additionally services <em>should</em> attempt to map any of the site-specific categories to the defaut list of categories defined by newznab. For example <cite>5040</cite> for HD TV releases.</p>
+</div>
+<div class="section" id="client-changes">
+<h2>Client Changes<a class="headerlink" href="#client-changes" title="Permalink to this headline">¶</a></h2>
+<div class="longlist docutils container">
+<ol class="arabic">
+<li><p class="first">If any two of the three <cite>seeders</cite>, <cite>leechers</cite> and <cite>peers</cite> attributes is provided, clients <em>should</em> automatically infer the value of the missing attribute.</p>
+</li>
+<li><p class="first">Clients <em>should</em> not use defaults for the <cite>minimumratio</cite> and <cite>minimumseedtime</cite> attributes unless they reflect the formal seeding requirements by the tracker.</p>
+<p>Clients <em>may</em> use the seeding criteria attributes to override a torrent client settings, but only if the criteria exceed the user’s preselected values. Users <em>should</em> be able to disable this behavior.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<p>With a few adjustments, the basic newznab api specification can be used for torrent support. The additional extended attributes should provide clients with enough tracker specific information to properly select releases.</p>
+<p>Many private trackers do not parser release titles and do not index season and episode numbers, this makes the <cite>season</cite>, <cite>ep</cite> and <cite>*id</cite> query parameters less effective. However, the indexer can effectively combine the clients <cite>q</cite>, <cite>season</cite> and <cite>ep</cite> query parameters to support the <cite>S01E01</cite> and <cite>1x01</cite> formats without additional api calls. How accurate the results are thus depends mostly on the service implementation.</p>
+</div>
+<div class="section" id="adoption">
+<h2>Adoption<a class="headerlink" href="#adoption" title="Permalink to this headline">¶</a></h2>
+<p>Torznab was first implemented for usage with HDAccess (now defunct) and later with HD4Free. It’s also used by Jackett and Cardigan to expose numerous trackers that do not have an api.</p>
+<p><em>This revision was documented in 2017 to keep a historical record.</em></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="1.1-Newznab-supportedParams.html" class="btn btn-neutral float-right" title="v1.1 - Newznab supportedParams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Revisions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Taloth Saldono.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.3-alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

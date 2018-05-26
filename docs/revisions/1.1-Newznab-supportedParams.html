@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>v1.1 - Newznab supportedParams &mdash; Torznab Specification 1.3-alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/example.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/tags.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/highlight-xml.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme-override.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Torznab Specification 1.3-alpha documentation" href="../index.html"/>
+        <link rel="up" title="Revisions" href="index.html"/>
+        <link rel="next" title="v1.2 - Torznab Download/Upload Factors" href="1.2-Torznab-Download-Upload-Factors.html"/>
+        <link rel="prev" title="v1.0 - Torznab Torrent Support" href="1.0-Torznab-Torrent-Support.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Torznab Specification
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../torznab/index.html">Torznab Specification</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Revisions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1.0-Torznab-Torrent-Support.html">v1.0 - Torznab Torrent Support</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">v1.1 - Newznab supportedParams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#service-changes">Service Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#client-changes">Client Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusions">Conclusions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adoption">Adoption</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="1.2-Torznab-Download-Upload-Factors.html">v1.2 - Torznab Download/Upload Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.3-Torznab-Release-Tags.html">v1.3 - Torznab Release Tags</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../external/index.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Torznab Specification</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Revisions</a> &raquo;</li>
+        
+      <li>v1.1 - Newznab supportedParams</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/revisions/1.1-Newznab-supportedParams.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="v1-1-newznab-supportedparams">
+<h1>v1.1 - Newznab supportedParams<a class="headerlink" href="#v1-1-newznab-supportedparams" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status:</th><td class="field-body"><p class="first"><strong>Adopted</strong> <span class="flag">newznab</span> <span class="flag">torznab</span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body"><p class="first">October 2015</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Attributions:</th><td class="field-body"><ul class="first last simple">
+<li>bb <em>(newznab)</em></li>
+<li>Taloth Saldono <em>(Sonarr)</em></li>
+<li>zoggy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Currently Newznab has no way to specify which query parameters are supported by specific indexers. With the disappearance of TvRage the <cite>rid</cite> is no longer useful and needs to be replaced, blindly assuming indexers use <cite>tvdbid</cite> will lead to compatibility issues.</p>
+<p>A <cite>supportedParams</cite> attribute should be added to the capabilities results to indicate which query parameters are supported.</p>
+<p>A <cite>tvdbid</cite> query param should be formalized, while preserving <cite>rid</cite>.</p>
+<p>In addition services should use an OR operator to process multiple <cite>*id</cite> query parameters, so that the query becomes <cite>if rid=123 OR tvdbid=8000</cite>, allowing clients to specify all ids they know regardless of whether the indexer has them associated.</p>
+</div>
+<div class="section" id="service-changes">
+<h2>Service Changes<a class="headerlink" href="#service-changes" title="Permalink to this headline">¶</a></h2>
+<div class="longlist docutils container">
+<ol class="arabic">
+<li><p class="first">Services <em>should</em> add the <cite>supportedParams</cite> attribute to the <cite>searching</cite> elements in the capabilities result:</p>
+<div class="admonition example">
+<p class="first admonition-title">Example</p>
+<div class="last highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;searching&gt;</span>
+   <span class="nt">&lt;search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;tv-search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q,rid,tvdbid,season,ep&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;movie-search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q,imdbid&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;audio-search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;book-search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/searching&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>Services <em>may</em> add additional query parameters to the list, for example <cite>traktid</cite>, <cite>tvmazeid</cite>, <cite>genre</cite>, <cite>group</cite>, <cite>artist</cite>.</p>
+<p>Standard query params such as <cite>cat</cite>, <cite>offset</cite>, <cite>limit</cite> etc <em>must</em> not be included since these are implied by the specification.</p>
+</li>
+<li><p class="first">Services not supporting <cite>q</cite>, <cite>rid</cite>, <cite>season</cite> or <cite>ep</cite> <em>shall</em> return an empty result if any of the query parameters is provided by the client.</p>
+<p>This is to ensure backward compatible behavior with clients unware of the <cite>supportedParams</cite> attribute.</p>
+</li>
+<li><p class="first">Services <em>may</em> support the extended attribute <cite>tvdbid</cite> or <cite>tvmazeid</cite>:</p>
+<table border="1" class="small docutils" id="id1">
+<caption><span class="caption-text">New extended attributes</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="10%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">type</th>
+<th class="head">default</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>tvdbid</td>
+<td>integer</td>
+<td><em>none</em></td>
+<td>TheTVDB show id associated with this release.</td>
+</tr>
+<tr class="row-odd"><td>tvmazeid</td>
+<td>integer</td>
+<td><em>none</em></td>
+<td>TVMaze show id associated with this release.</td>
+</tr>
+</tbody>
+</table>
+<p>If supported, these attributes <em>should</em> be queryable via tv-search query parameters <cite>tvdbid</cite> and <cite>tvmazeid</cite> respectively.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="client-changes">
+<h2>Client Changes<a class="headerlink" href="#client-changes" title="Permalink to this headline">¶</a></h2>
+<div class="longlist docutils container">
+<ol class="arabic">
+<li><p class="first">Clients <em>shall</em> assume the following values if <cite>supportedParams</cite> is not supplied:</p>
+<table border="1" class="small center docutils" id="id2">
+<caption><span class="caption-text">supportedParams defaults</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">element</th>
+<th class="head">default supportedParams</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>search</td>
+<td>q</td>
+</tr>
+<tr class="row-odd"><td>tv-search</td>
+<td>q,rid,season,ep</td>
+</tr>
+<tr class="row-even"><td>movie-search</td>
+<td>q,imdbid</td>
+</tr>
+<tr class="row-odd"><td>audio-search</td>
+<td>q</td>
+</tr>
+<tr class="row-even"><td>book-search</td>
+<td>q</td>
+</tr>
+</tbody>
+</table>
+<p>The tv-search mimics the original newznab specification before <cite>supportedParams</cite> was known and ensures backward compatibility with old service implementations.</p>
+</li>
+<li><p class="first">Clients <em>shall</em> parse the <cite>supportedParams</cite> attribute to determine which query parameters are available and only query</p>
+</li>
+<li><p class="first">Clients <em>shall</em> only submit multiple <cite>*id</cite> parameters if the <cite>supportedParams</cite> is present, for other services the client <em>should</em> use separate api calls.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<p>The proposed changes will ensure that each indexer can specify which query parameters it supports. This allows clients to automatically handle both basic and advanced/customized indexers properly.</p>
+<p>The new OR operator for the id-based search allows clients to submit <em>all</em> different ids simultaneously and reduce the number of api calls needed.</p>
+</div>
+<div class="section" id="adoption">
+<h2>Adoption<a class="headerlink" href="#adoption" title="Permalink to this headline">¶</a></h2>
+<p>These changes were integrated in the Newznab codebase in late 2015 and is used by most newznab indexers.</p>
+<p>The changes have also been adopted by nZEDb and Torznab.</p>
+<p><em>This revision was documented in 2017 to keep a historical record.</em></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="1.2-Torznab-Download-Upload-Factors.html" class="btn btn-neutral float-right" title="v1.2 - Torznab Download/Upload Factors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="1.0-Torznab-Torrent-Support.html" class="btn btn-neutral" title="v1.0 - Torznab Torrent Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Taloth Saldono.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.3-alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

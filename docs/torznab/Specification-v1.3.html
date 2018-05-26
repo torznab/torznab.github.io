@@ -1,0 +1,969 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; Torznab Specification 1.3-alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/example.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/tags.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/highlight-xml.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme-override.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Torznab Specification 1.3-alpha documentation" href="../index.html"/>
+        <link rel="up" title="Torznab Specification" href="index.html"/>
+        <link rel="next" title="Revisions" href="../revisions/index.html"/>
+        <link rel="prev" title="Torznab Specification" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Torznab Specification
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Torznab Specification</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#terminology">Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#torznab-api-specification">Torznab Api Specification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#formatting">Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-queries">Standard Queries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generic">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-overview">Function Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#administrative-functions">Administrative functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#caps-function">‘caps’ function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#search-functions">Search functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#search">‘search’</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#capabilities">Capabilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#caps-format">Caps Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#supported-params">Supported Params</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extended-attributes">Extended attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#predefined-attributes">Predefined attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#client-implementation-guidelines">Client Implementation Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#service-implementation-guidelines">Service Implementation Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cat-parameter">‘cat’ parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attrs-and-extended-parameters">‘attrs’ and ‘extended’ parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#offset-and-limit-parameters">‘offset’ and ‘limit’ parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tag-parameter">‘tag’ parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#general-api">General api</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../revisions/index.html">Revisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external/index.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Torznab Specification</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Torznab Specification</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/torznab/Specification-v1.3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Torznab is an api specification based on the Newznab WebAPI. The api is built around a simple xml/rss feed with filtering and paging capabilities.</p>
+<p>The Torznab standard strives to be completely compliant with Newznab, insofar it does not conflict with it’s primary goal to supply an consistent api for torrents.</p>
+<p><span class="flag">newznab</span> and <span class="flag">torznab</span> tags wil be used to designate differences between the two specifications. <br/>
+The <span class="flag">newznab</span> tag either designates newznab specific behavior, or functions that are optional in Newznab and not implemented in Torznab. <br/>
+The <span class="flag">torznab</span> tag indicates functionality specific to Torznab. Some <span class="flag">torznab</span> functionality has been implemented later by Newznab, but has not been added to the Newznab WebAPI documentation.</p>
+</div>
+<div class="section" id="terminology">
+<h1>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h1>
+<p>This document contains the terms <em>shall</em>, <em>must</em>, <em>should</em> and <em>may</em>. These terms are used in the following meaning:</p>
+<ul class="simple">
+<li><em>shall</em> and <em>must</em> means that a particular requirement is mandatory. (The chosen term is dependent on the subject type)</li>
+<li><em>should</em> means that a particular requirement is recommended but not mandatory.</li>
+<li><em>may</em> means that a particular requirement is entirely optional.</li>
+</ul>
+</div>
+<div class="section" id="torznab-api-specification">
+<h1>Torznab Api Specification<a class="headerlink" href="#torznab-api-specification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="formatting">
+<h2>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h2>
+<p>The api uses HTTP/HTTPS calls with xml results using the utf-8 encoding.</p>
+</div>
+<div class="section" id="standard-queries">
+<h2>Standard Queries<a class="headerlink" href="#standard-queries" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generic">
+<h3>Generic<a class="headerlink" href="#generic" title="Permalink to this headline">¶</a></h3>
+<p>All api calls in torznab consist of a HTTP GET call to the <code class="docutils literal"><span class="pre">/api</span></code> endpoint with several query parameters.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>t={…}</td>
+<td>Mandatory. Specifies which function should be invoked.</td>
+</tr>
+<tr class="row-even"><td>apikey={…}</td>
+<td>Authentication key which may be mandatory. Authenticates the user.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal"><span class="pre">apikey</span></code> may or may not be mandatory depending on the indexer, most newznab indexers require apikey authentication, but some public indexers do not.</p>
+<p><strong>HTTP Request</strong></p>
+<p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/api?t={function}[&amp;apikey={apikey}]</span></code></p>
+<p><strong>HTTP Response</strong></p>
+<p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div>
+<div class="section" id="function-overview">
+<h3>Function Overview<a class="headerlink" href="#function-overview" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>caps</td>
+<td>Returns the capabilities of the api.</td>
+</tr>
+<tr class="row-even"><td>search</td>
+<td>Free text search query.</td>
+</tr>
+<tr class="row-odd"><td>tvsearch</td>
+<td>Search query with tv specific query params and filtering.</td>
+</tr>
+<tr class="row-even"><td>movie</td>
+<td>Search query with movie specific query params and filtering.</td>
+</tr>
+<tr class="row-odd"><td>music</td>
+<td>Search query with music specific query params and filtering.</td>
+</tr>
+<tr class="row-even"><td>book</td>
+<td>Search query with book specific query params and filtering.</td>
+</tr>
+<tr class="row-odd"><td>details</td>
+<td><span class="flag">newznab</span> Returns all details about a particular item.</td>
+</tr>
+<tr class="row-even"><td>getnfo</td>
+<td><span class="flag">newznab</span> Returns an nfo for a particular item.</td>
+</tr>
+<tr class="row-odd"><td>get</td>
+<td><span class="flag">newznab</span> Returns nzb for the specified item.</td>
+</tr>
+<tr class="row-even"><td>card-add</td>
+<td><span class="flag">newznab</span> Adds item to the users cart.</td>
+</tr>
+<tr class="row-odd"><td>card-del</td>
+<td><span class="flag">newznab</span> Removes item from the users cart.</td>
+</tr>
+<tr class="row-even"><td>comments</td>
+<td><span class="flag">newznab</span> Returns all comments known about an item.</td>
+</tr>
+<tr class="row-odd"><td>comments-add</td>
+<td><span class="flag">newznab</span> Adds a comment to an item.</td>
+</tr>
+<tr class="row-even"><td>register</td>
+<td><span class="flag">newznab</span> Register a new user account.</td>
+</tr>
+<tr class="row-odd"><td>user</td>
+<td><span class="flag">newznab</span> Retrieves information about an user account.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="administrative-functions">
+<h3>Administrative functions<a class="headerlink" href="#administrative-functions" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="caps-function">
+<h3>‘caps’ function<a class="headerlink" href="#caps-function" title="Permalink to this headline">¶</a></h3>
+<p>The caps query should be supported by all implementations. It specifies the api version and other metadata useful to the client.</p>
+<p><span class="flag">newznab</span> apikey authentication is not required for this function. <br/>
+<span class="flag">torznab</span> apikey authentication is usually not required for this function, but some private trackers require it for security reasons.</p>
+<p><strong>HTTP Request</strong></p>
+<p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/api?t=caps</span></code></p>
+<p><strong>Response</strong></p>
+<p>See <a class="reference internal" href="#capabilities"><span class="std std-ref">Capabilities</span></a>.</p>
+</div>
+<div class="section" id="search-functions">
+<h3>Search functions<a class="headerlink" href="#search-functions" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>Generic<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>All search functions have certain query params that control the results.</p>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cat</td>
+<td>Comma separated list of category numbers that should be included.</td>
+</tr>
+<tr class="row-even"><td>attrs</td>
+<td>Comma separated list of extended attribute names that should be included in the results.</td>
+</tr>
+<tr class="row-odd"><td>extended=1</td>
+<td>Specifies that all extended attributes should be included in the results. Overrules <cite>attrs</cite>.</td>
+</tr>
+<tr class="row-even"><td>offset</td>
+<td>Number of items to skip in the result.</td>
+</tr>
+<tr class="row-odd"><td>limit</td>
+<td>Number of results to return. Limited by the <cite>limits</cite> element in the <a class="reference internal" href="#capabilities"><span class="std std-ref">Capabilities</span></a>.</td>
+</tr>
+</tbody>
+</table>
+<p>If <code class="docutils literal"><span class="pre">offset</span></code> is out of bounds, then an empty result set will be returned.</p>
+</div>
+<div class="section" id="search">
+<h3>‘search’<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h3>
+<p>The search function provides free text search support without specific movie/tv/etc query parameters.</p>
+<p><strong>HTTP Request</strong></p>
+<p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/api?t=search</span></code></p>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>q</td>
+<td>Free text search query. Indexer specific implementations and patterns may apply.</td>
+</tr>
+<tr class="row-even"><td>tag</td>
+<td><span class="flag">torznab</span> Comma separated list of tags that must (not) be present in the results.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong></p>
+<p>See ‘standard response’.</p>
+</div>
+</div>
+<div class="section" id="capabilities">
+<span id="id2"></span><h2>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this headline">¶</a></h2>
+<p>The capabilities of the newznab / torznab indexer service is retrievable via the <code class="docutils literal"><span class="pre">/api?t=caps</span></code> endpoint. It’s intended to provide the client with information about which search capabilities, categories, groups etc the indexer supports.</p>
+<p>This information is crucial since it allows the indexer to implement a limited number of search parameters, clients use the <cite>supportedParams</cite> list to determine whether efficient ‘indexed’ queries are available or that the client must use the generic <cite>q</cite> free text search capability.</p>
+<p>The result of the api call is a simple XML document with the following format:</p>
+<div class="section" id="caps-format">
+<h3>Caps Format<a class="headerlink" href="#caps-format" title="Permalink to this headline">¶</a></h3>
+<div class="admonition example">
+<p class="first admonition-title">Example</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;
+&lt;caps&gt;</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&lt;server version=”1.1” title=”…” strapline=”…”</dt>
+<dd>email=”…” url=”<a class="reference external" href="http://indexer.local/">http://indexer.local/</a>”
+image=”<a class="reference external" href="http://indexer.local/content/banner.jpg">http://indexer.local/content/banner.jpg</a>” /&gt;</dd>
+</dl>
+<p>&lt;limits max=”100” default=”50” /&gt;
+&lt;retention days=”400” /&gt;
+&lt;registration available=”yes” open=”yes” /&gt;</p>
+<dl class="docutils">
+<dt>&lt;searching&gt;</dt>
+<dd>&lt;search available=”yes” supportedParams=”q” /&gt;
+&lt;tv-search available=”yes” supportedParams=”q,rid,tvdbid,season,ep” /&gt;
+&lt;movie-search available=”no” supportedParams=”q,imdbid,genre” /&gt;
+&lt;audio-search available=”no” supportedParams=”q” /&gt;
+&lt;book-search available=”no” supportedParams=”q” /&gt;</dd>
+</dl>
+<p>&lt;/searching&gt;</p>
+<dl class="docutils">
+<dt>&lt;categories&gt;</dt>
+<dd><dl class="first docutils">
+<dt>&lt;category id=”2000” name=”Movies”&gt;</dt>
+<dd>&lt;subcat id=”2010” name=”Foreign” /&gt;</dd>
+</dl>
+<p>&lt;/category&gt;
+&lt;category id=”5000” name=”TV”&gt;</p>
+<blockquote>
+<div>&lt;subcat id=”5040” name=”HD” /&gt;
+&lt;subcat id=”5070” name=”Anime” /&gt;</div></blockquote>
+<p class="last">&lt;/category&gt;</p>
+</dd>
+</dl>
+<p>&lt;/categories&gt;</p>
+<dl class="docutils">
+<dt>&lt;groups&gt;</dt>
+<dd>&lt;group id=”1” name=”alt.binaries….” description=”…” lastupdate=”…” /&gt;</dd>
+</dl>
+<p>&lt;/groups&gt;</p>
+<dl class="docutils">
+<dt>&lt;genres&gt;</dt>
+<dd>&lt;genre id=”1” categoryid=”5000” name=”Kids” /&gt;</dd>
+</dl>
+<p>&lt;/genres&gt;</p>
+<dl class="docutils">
+<dt>&lt;tags&gt;</dt>
+<dd>&lt;tag name=”anonymous” description=”Uploader is anonymous” /&gt;
+&lt;tag name=”trusted” description=”Uploader has high reputation” /&gt;
+&lt;tag name=”internal” description=”Uploader is an internal release group” /&gt;</dd>
+</dl>
+<p>&lt;/tags&gt;</p>
+</div></blockquote>
+<p class="last">&lt;/caps&gt;</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>server</td>
+<td>Information about the server itself, all attributes are free to be changed by the indexer.</td>
+</tr>
+<tr class="row-even"><td>limits</td>
+<td>Specifies the maximum and default values for the <cite>limit</cite> query parameter.</td>
+</tr>
+<tr class="row-odd"><td>retention</td>
+<td><span class="flag">newznab</span> Usenet retention in days. <br/>
+<span class="flag">torznab</span> Should be omitted.</td>
+</tr>
+<tr class="row-even"><td>searching</td>
+<td>Specifies the search capabilities of individual search modes. See <a class="reference internal" href="#supported-params"><span class="std std-ref">Supported Params</span></a>.</td>
+</tr>
+<tr class="row-odd"><td>categories</td>
+<td>List of known categories for use in the <cite>cat</cite> query parameter.</td>
+</tr>
+<tr class="row-even"><td>groups</td>
+<td><span class="flag">newznab</span> Optional list of usenet groups that are indexed. <br/>
+<span class="flag">torznab</span> No current application specified.</td>
+</tr>
+<tr class="row-odd"><td>genres</td>
+<td>Optional list of known genres for use in the <cite>genre</cite> query parameter.</td>
+</tr>
+<tr class="row-even"><td>tags</td>
+<td><span class="flag">torznab</span> Optional list of supported tags for use in the <cite>tag</cite> query parameter.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="supported-params">
+<span id="id3"></span><h3>Supported Params<a class="headerlink" href="#supported-params" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="section" id="extended-attributes">
+<h1>Extended attributes<a class="headerlink" href="#extended-attributes" title="Permalink to this headline">¶</a></h1>
+<p>Newznab and Torznab use several of the attributes and elements defined by the RSS specification, but also add several additional attributes in a separate xml namespace.</p>
+<p><span class="flag">newznab</span> All attributes reside in the <code class="docutils literal"><span class="pre">xmlns:newznab=&quot;http://www.newznab.com/DTD/2010/feeds/attributes/&quot;</span></code> namespace. <br/>
+<span class="flag">torznab</span> All attributes reside in the <code class="docutils literal"><span class="pre">xmlns:torznab=&quot;http://torznab.com/schemas/2015/feed&quot;</span></code> namespace.</p>
+<p>Extended attributes follow the format:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;torznab:attr</span> <span class="na">name=</span><span class="s">&quot;seeders&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;torznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;5000&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;torznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;5040&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Several extended attributes may occur multiple times, such as <cite>category</cite>.</p>
+<p>Clients <em>shall</em> handle attributes with the same name but with different values as a list instead of a singular value. Clients <em>shall</em> ignore duplicate values.</p>
+<div class="section" id="predefined-attributes">
+<h2>Predefined attributes<a class="headerlink" href="#predefined-attributes" title="Permalink to this headline">¶</a></h2>
+<p>These predefined attributes are optional except for the <cite>size</cite> and <cite>category</cite> attribute.</p>
+<blockquote>
+<div><table border="1" class="small docutils" id="id10">
+<caption><span class="caption-text">Predefined newznab &amp; torznab extended attributes</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="4%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">scope</th>
+<th class="head">type</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>size</td>
+<td>all</td>
+<td>integer</td>
+<td>Size in bytes</td>
+</tr>
+<tr class="row-odd"><td>category</td>
+<td>all</td>
+<td>integer</td>
+<td>Category id. May occur multiple times.</td>
+</tr>
+<tr class="row-even"><td>tag</td>
+<td>all</td>
+<td>string</td>
+<td><span class="flag">torznab</span> Individual tag. May occur multiple times.</td>
+</tr>
+<tr class="row-odd"><td>guid</td>
+<td>all</td>
+<td>string</td>
+<td>Unique release guid.</td>
+</tr>
+<tr class="row-even"><td>files</td>
+<td>all</td>
+<td>integer</td>
+<td>Number of files in the release</td>
+</tr>
+<tr class="row-odd"><td>poster</td>
+<td>all</td>
+<td>string</td>
+<td><span class="flag">newznab</span> NNTP poster (eg. <code class="docutils literal"><span class="pre">yenc&#64;power-poster</span></code>) <br/>
+<span class="flag">torznab</span> Username that uploaded the release to the tracker.</td>
+</tr>
+<tr class="row-even"><td>group</td>
+<td>all</td>
+<td>string</td>
+<td><span class="flag">newznab</span> NNTP Group(s) (eg. <code class="docutils literal"><span class="pre">a.b.group,</span> <span class="pre">a.b.tv</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>team</td>
+<td>all</td>
+<td>string</td>
+<td>Team doing the release. (Release Group name)</td>
+</tr>
+<tr class="row-even"><td>grabs</td>
+<td>all</td>
+<td>integer</td>
+<td>Number of times the release was fetched from the indexer.</td>
+</tr>
+<tr class="row-odd"><td>seeders</td>
+<td>all</td>
+<td>integer</td>
+<td><span class="flag">torznab</span> Number of active seeders according to the tracker(s).</td>
+</tr>
+<tr class="row-even"><td>leechers</td>
+<td>all</td>
+<td>integer</td>
+<td><span class="flag">torznab</span> Number of active leechers (non-seeders) according to the tracker(s).</td>
+</tr>
+<tr class="row-odd"><td>peers</td>
+<td>all</td>
+<td>integer</td>
+<td><span class="flag">torznab</span> Number of active peers (seeders and leechers) according to the tracker(s).</td>
+</tr>
+<tr class="row-even"><td>infohash</td>
+<td>all</td>
+<td>string</td>
+<td><span class="flag">torznab</span> Torrent infohash as lower-case hexadecimal string.</td>
+</tr>
+<tr class="row-odd"><td>magneturl</td>
+<td>all</td>
+<td>url</td>
+<td><span class="flag">torznab</span> Magnet uri.</td>
+</tr>
+<tr class="row-even"><td>seedtype</td>
+<td>all</td>
+<td>string</td>
+<td><span class="flag">torznab</span> Specifies which seed criteria must be met. Possible values are: <cite>ratio</cite>, <cite>seedtime</cite>, <cite>both</cite> or <cite>either</cite> (default).</td>
+</tr>
+<tr class="row-odd"><td>minimumratio</td>
+<td>all</td>
+<td>decimal</td>
+<td><span class="flag">torznab</span> Minimum ratio required before the torrent client may stop seeding.</td>
+</tr>
+<tr class="row-even"><td>minimumseedtime</td>
+<td>all</td>
+<td>decimal</td>
+<td><span class="flag">torznab</span> Minimum time in seconds that the torrent must be actively seeded by the client before it may be stopped.</td>
+</tr>
+<tr class="row-odd"><td>downloadvolumefactor</td>
+<td>all</td>
+<td>decimal</td>
+<td><span class="flag">torznab</span> Multiplier for the download volume that counts toward the user’s account on the tracker. Freeleech would be <cite>0.0</cite>.</td>
+</tr>
+<tr class="row-even"><td>uploadvolumefactor</td>
+<td>all</td>
+<td>decimal</td>
+<td><span class="flag">torznab</span> Multiplier for the upload volume that counts toward the user’s account on the tracker.</td>
+</tr>
+<tr class="row-odd"><td>password</td>
+<td>all</td>
+<td>integer</td>
+<td>Whether the archive is passworded (<a href="#id4"><span class="problematic" id="id5">`</span></a>0`=no, <a href="#id6"><span class="problematic" id="id7">`</span></a>1`=rar password, <a href="#id8"><span class="problematic" id="id9">`</span></a>2`=contains inner archive)</td>
+</tr>
+<tr class="row-even"><td>comments</td>
+<td>all</td>
+<td>integer</td>
+<td>Number of comments</td>
+</tr>
+<tr class="row-odd"><td>usenetdate</td>
+<td>all</td>
+<td>string</td>
+<td><span class="flag">newznab</span> Date the release was uploaded to usenet (eg. <code class="docutils literal"><span class="pre">Tue,</span> <span class="pre">22</span> <span class="pre">Jun</span> <span class="pre">2010</span> <span class="pre">06:54:22</span> <span class="pre">+0100</span></code>)</td>
+</tr>
+<tr class="row-even"><td>nfo</td>
+<td>all</td>
+<td>integer</td>
+<td>Whether an .nfo file is available. (<cite>0</cite> no, <cite>1</cite> yes)</td>
+</tr>
+<tr class="row-odd"><td>info</td>
+<td>all</td>
+<td>string</td>
+<td>Url for the .nfo file.</td>
+</tr>
+<tr class="row-even"><td>year</td>
+<td>all</td>
+<td>integer</td>
+<td>Release year</td>
+</tr>
+<tr class="row-odd"><td>coverurl</td>
+<td>all</td>
+<td>string</td>
+<td>Cover image url</td>
+</tr>
+<tr class="row-even"><td>backdropurl</td>
+<td>all</td>
+<td>string</td>
+<td>Backdrop image url</td>
+</tr>
+<tr class="row-odd"><td>review</td>
+<td>all</td>
+<td>string</td>
+<td>Critics review</td>
+</tr>
+<tr class="row-even"><td>season</td>
+<td>tv</td>
+<td>integer</td>
+<td>Season number</td>
+</tr>
+<tr class="row-odd"><td>episode</td>
+<td>tv</td>
+<td>integer</td>
+<td>Episode number</td>
+</tr>
+<tr class="row-even"><td>rageid</td>
+<td>tv</td>
+<td>integer</td>
+<td>Detected TVRage ID. (TVRage.com, now defunct)</td>
+</tr>
+<tr class="row-odd"><td>tvtitle</td>
+<td>tv</td>
+<td>string</td>
+<td>Human readable Show Title (originally from TV Rage)</td>
+</tr>
+<tr class="row-even"><td>tvairdate</td>
+<td>tv</td>
+<td>string</td>
+<td>Air date for the episode (eg. <code class="docutils literal"><span class="pre">Tue,</span> <span class="pre">22</span> <span class="pre">Jun</span> <span class="pre">2010</span> <span class="pre">06:54:22</span> <span class="pre">+0100</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>tvdbid</td>
+<td>tv</td>
+<td>integer</td>
+<td>TheTVDB show id associated with this release.</td>
+</tr>
+<tr class="row-even"><td>tvmazeid</td>
+<td>tv</td>
+<td>integer</td>
+<td>TVMaze show id associated with this release.</td>
+</tr>
+<tr class="row-odd"><td>genre</td>
+<td>tv, movies</td>
+<td>string</td>
+<td>Genre (eg. <code class="docutils literal"><span class="pre">Horror,</span> <span class="pre">Comedy</span></code>)</td>
+</tr>
+<tr class="row-even"><td>video</td>
+<td>tv, movies</td>
+<td>string</td>
+<td>Video Codec (eg. <code class="docutils literal"><span class="pre">x264</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>audio</td>
+<td>tv, movies, audio</td>
+<td>string</td>
+<td>Audio Codec (eg. <code class="docutils literal"><span class="pre">AC3</span> <span class="pre">2.0</span> <span class="pre">&#64;</span> <span class="pre">384</span> <span class="pre">kbs</span></code>)</td>
+</tr>
+<tr class="row-even"><td>resolution</td>
+<td>tv, movies</td>
+<td>string</td>
+<td>Video resolution (eg. <code class="docutils literal"><span class="pre">1280x716</span> <span class="pre">1.78:1</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>framerate</td>
+<td>tv, movies</td>
+<td>string</td>
+<td>Video framerate (eg. <code class="docutils literal"><span class="pre">23.976</span> <span class="pre">fps</span></code>)</td>
+</tr>
+<tr class="row-even"><td>language</td>
+<td>tv, movies, audio</td>
+<td>string</td>
+<td>Video/Audio languages (eg. <code class="docutils literal"><span class="pre">English</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>subs</td>
+<td>tv, movies</td>
+<td>string</td>
+<td>Subtitle languages (eg. <code class="docutils literal"><span class="pre">English,</span> <span class="pre">Spanish</span></code>)</td>
+</tr>
+<tr class="row-even"><td>imdb</td>
+<td>movies</td>
+<td>string</td>
+<td>Imdb ID. (www.imdb.com)</td>
+</tr>
+<tr class="row-odd"><td>imdbscore</td>
+<td>movies</td>
+<td>string</td>
+<td>Imdb score (eg. <code class="docutils literal"><span class="pre">5/10</span></code>)</td>
+</tr>
+<tr class="row-even"><td>imdbtitle</td>
+<td>movies</td>
+<td>string</td>
+<td>Imdb title</td>
+</tr>
+<tr class="row-odd"><td>imdbtagline</td>
+<td>movies</td>
+<td>string</td>
+<td>Imdb tagline</td>
+</tr>
+<tr class="row-even"><td>imdbplot</td>
+<td>movies</td>
+<td>string</td>
+<td>Imdb plot</td>
+</tr>
+<tr class="row-odd"><td>imdbyear</td>
+<td>movies</td>
+<td>integer</td>
+<td>Imdb year</td>
+</tr>
+<tr class="row-even"><td>imdbdirector</td>
+<td>movies</td>
+<td>string</td>
+<td>Imdb director</td>
+</tr>
+<tr class="row-odd"><td>imdbactors</td>
+<td>movies</td>
+<td>string</td>
+<td>Imdb actors</td>
+</tr>
+<tr class="row-even"><td>artist</td>
+<td>music</td>
+<td>string</td>
+<td>Artist name</td>
+</tr>
+<tr class="row-odd"><td>album</td>
+<td>music</td>
+<td>string</td>
+<td>Album name</td>
+</tr>
+<tr class="row-even"><td>publisher</td>
+<td>music</td>
+<td>string</td>
+<td>Publisher name</td>
+</tr>
+<tr class="row-odd"><td>tracks</td>
+<td>music</td>
+<td>string</td>
+<td>Track listing (eg. <code class="docutils literal"><span class="pre">Track</span> <span class="pre">1|Track</span> <span class="pre">2|Track</span> <span class="pre">3</span></code>)</td>
+</tr>
+<tr class="row-even"><td>booktitle</td>
+<td>book</td>
+<td>string</td>
+<td>Book title</td>
+</tr>
+<tr class="row-odd"><td>publishdate</td>
+<td>book</td>
+<td>string</td>
+<td>Date the book was published</td>
+</tr>
+<tr class="row-even"><td>author</td>
+<td>book</td>
+<td>string</td>
+<td>Booth author</td>
+</tr>
+<tr class="row-odd"><td>pages</td>
+<td>book</td>
+<td>integer</td>
+<td>Number of book pages</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="client-implementation-guidelines">
+<h1>Client Implementation Guidelines<a class="headerlink" href="#client-implementation-guidelines" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Needs to be implemented.</p>
+</div>
+</div>
+<div class="section" id="service-implementation-guidelines">
+<h1>Service Implementation Guidelines<a class="headerlink" href="#service-implementation-guidelines" title="Permalink to this headline">¶</a></h1>
+<p>These guidelines aim to eliminate ambiguity in the expected behavior of the service implementation. It also describes common pitfalls for service implementations.
+Service implementations may deviate from these guidelines and as such clients should not assume services to conform.</p>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>The query parameter’s name <em>must</em> be evaluated case-insensitive.</p>
+<p>The service <em>shall</em> verify for each parameter whether the value is within the accepted range or, unless specified, return error <code class="docutils literal"><span class="pre">201</span> <span class="pre">-</span> <span class="pre">Incorrect</span> <span class="pre">parameter</span></code>.</p>
+<div class="section" id="cat-parameter">
+<h3>‘cat’ parameter<a class="headerlink" href="#cat-parameter" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>cat</cite> parameter is a comma separated list of categories for which the client wishes to receive the results.
+The service <em>should</em> fully implement this query parameter.</p>
+<p>The <cite>cat</cite> parameter <em>must</em> be verified to contain a comma separated list of integer numbers. For example using the <code class="regexp docutils literal"><span class="pre">^d+(,d+)*$</span></code> regular expression. If the parameter is invalid, then the error <code class="docutils literal"><span class="pre">201</span> <span class="pre">-</span> <span class="pre">Incorrect</span> <span class="pre">parameter</span></code> <em>must</em> be returned.</p>
+<p>If the <cite>cat</cite> parameter is not included in the query sent by the client, the service <em>should</em> return the results for all categories.</p>
+<p>Unknown categories <em>must</em> be silently ignored, if all categories specified by the <cite>cat</cite> parameter are unknown then the service <em>shall</em> return an empty result set.</p>
+<p>The service <em>shall</em> return an item only once if it exists in multiple specified categories.</p>
+<div class="admonition example">
+<p class="first admonition-title">Example</p>
+<p><code class="docutils literal"><span class="pre">cat=4030,5070,1234</span></code> returns results that exist in category 4030 and/or 5070. 1234, being an unknown category, is ignored.</p>
+<p class="last"><code class="docutils literal"><span class="pre">cat=1234</span></code> returns no results at all since there are no items in the specified unknown category.</p>
+</div>
+</div>
+<div class="section" id="attrs-and-extended-parameters">
+<h3>‘attrs’ and ‘extended’ parameters<a class="headerlink" href="#attrs-and-extended-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>attrs</cite> parameter is a comma separated list of extended attribute names, allowing the client to request that specific extended attributes are included in the results.
+The <cite>extended</cite> parameter is used to request <em>all</em> supported extended attributes.</p>
+<p>The service <em>shall</em> either implement both parameters, only the <cite>extended</cite> parameter or none.</p>
+<p>If the service does not implement the query parameters, then all supported extended attributes <em>must</em> be included in the result set.</p>
+<p>The service <em>shall</em> accept the <cite>extended</cite> parameter value <cite>1</cite> and <cite>0</cite> to determine whether all extended attributes are requested by the client.
+The service <em>may</em> also accept the values <cite>true</cite>/<cite>yes</cite> and <cite>false</cite>/<cite>no</cite>, with any capitalization. Any other value <em>should</em> result in error <code class="docutils literal"><span class="pre">201</span> <span class="pre">-</span> <span class="pre">Incorrect</span> <span class="pre">parameter</span></code>.</p>
+<p>If the <cite>extended</cite> parameter is not ‘true’ then the service <em>shall</em> include all supported extended attribute specified by the <cite>attrs</cite> parameter.</p>
+<p>The <cite>attrs</cite> parameter must be validated against invalid characters. For example using the <code class="regexp docutils literal"><span class="pre">^[a-zA-Z]+(,[a-zA-Z]+)*$</span></code> regular expression.
+Unknown extended attributes specified in the <cite>attrs</cite> parameter <em>must</em> be silently ignored.</p>
+</div>
+<div class="section" id="offset-and-limit-parameters">
+<h3>‘offset’ and ‘limit’ parameters<a class="headerlink" href="#offset-and-limit-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>offset</cite> and <cite>limit</cite> parameters is used to specify which portion of the result set should be returned to the client. The service <em>shall</em> implement both parameters.</p>
+<p>The service <em>shall</em> verify whether both values are integers greater or equal to zero. Otherwise the error <code class="docutils literal"><span class="pre">201</span> <span class="pre">-</span> <span class="pre">Incorrect</span> <span class="pre">parameter</span></code> <em>must</em> be returned.</p>
+<p>The <cite>offset</cite> specifies how many items in the result set should be skipped. The offset <em>must</em> default to the value zero.</p>
+<p>The service <em>shall</em> return an empty result if offset is equal or exceeds the total number of results.</p>
+<p>The <cite>limit</cite> parameter specifies how many results should be returned.
+The default and maximum value for <cite>limit</cite> is specified by the <a class="reference internal" href="#capabilities"><span class="std std-ref">Capabilities</span></a>. The service <em>should</em> automatically limit the value to the maximum.</p>
+</div>
+<div class="section" id="tag-parameter">
+<h3>‘tag’ parameter<a class="headerlink" href="#tag-parameter" title="Permalink to this headline">¶</a></h3>
+<p>Added to <span class="flag">torznab</span> in version 1.3.</p>
+<p>The service <em>may</em> implement the <cite>tag</cite> parameter, if it does then the <cite>supportedParams</cite> attribute in the <a class="reference internal" href="#capabilities"><span class="std std-ref">Capabilities</span></a> <em>must</em> include ‘tag’.</p>
+<p>The <cite>tag</cite> parameter is a comma separated list of tags that must (not) be present in the results. A prefixed hyphen (<cite>-</cite>) means exclusion. The order of tags in the list is irrelevant.</p>
+<p>Returned results <em>must</em> match all tags specified by the parameter.</p>
+<p>The service <em>shall</em> treat unknown tags as if no release has the tag and behave appropriatly based on whether it’s an inclusion or exclusion.</p>
+<p>A list of supported tags <em>should</em> be included in the <a class="reference internal" href="#capabilities"><span class="std std-ref">Capabilities</span></a>.</p>
+<div class="admonition example">
+<p class="first admonition-title">Example</p>
+<p class="last"><code class="docutils literal"><span class="pre">tag=anonymous,-remake</span></code> indicates that all releases must have the tag ‘anonymous’ and must not have the tag ‘remake’.</p>
+</div>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Incomplete</p>
+</div>
+</div>
+</div>
+<div class="section" id="general-api">
+<h2>General api<a class="headerlink" href="#general-api" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Todo</p>
+<p class="last">Needs to be implemented.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../revisions/index.html" class="btn btn-neutral float-right" title="Revisions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Torznab Specification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Taloth Saldono.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.3-alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

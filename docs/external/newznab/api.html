@@ -1,0 +1,2893 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Newznab Web API &mdash; Torznab Specification 1.3-alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/example.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/tags.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/highlight-xml.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme-override.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Torznab Specification 1.3-alpha documentation" href="../../index.html"/>
+        <link rel="up" title="External References" href="../index.html"/>
+        <link rel="prev" title="External References" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Torznab Specification
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../torznab/index.html">Torznab Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../revisions/index.html">Revisions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">External References</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Newznab Api</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#notation">Notation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#caps">CAPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register">REGISTER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#search">SEARCH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tv-search">TV-SEARCH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#movie-search">MOVIE-SEARCH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#music-search">MUSIC-SEARCH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#book-search">BOOK-SEARCH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#details">DETAILS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getnfo">GETNFO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get">GET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cart-add">CART-ADD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cart-del">CART-DEL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comments">COMMENTS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comments-add">COMMENTS-ADD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user">USER</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#predefined-categories">Predefined Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predefined-attributes">Predefined Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#list-of-attributes">List of Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attribute-example">Attribute Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#newznab-error-codes">Newznab Error Codes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#error-code-example">Error code example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Torznab Specification</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">External References</a> &raquo;</li>
+        
+      <li>Newznab Web API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/external/newznab/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="newznab-web-api">
+<h1>Newznab Web API<a class="headerlink" href="#newznab-web-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This document describes the NEWZNAB Usenet Searching Web API. The API is
+designed to be implemented by Usenet indexing sites, i.e. sites that index
+Usenet newsgroups through some means, typically by downloading and inspecting
+the NTTP headers. The API is aimed for NZB aware client applications  to allow
+them to perform Usenet searches against Newznab servers and receive NZB
+information in order to facilitate direct downloading from Usenet without
+having to download any NTTP headers.</p>
+<p>This document does not describe the actual implementation of either the client
+or the server but just describes the HTTP(S) interface and request/response
+sequences.</p>
+<p>Intended readers are server and client implementers.</p>
+<div class="section" id="notation">
+<h3>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">¶</a></h3>
+<p>This document uses the following notations:</p>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">t=c</span></code> denotes a required HTTP query parameter.</li>
+<li><code class="docutils literal"><span class="pre">[o=json</span> <span class="pre">|</span> <span class="pre">o=xml]</span></code> denotes optional parameters with possible values.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>All functions are executed as HTTP(S) requests over TCP. All parameters are to
+be passed as query parameters unless otherwise indicated. All returned XML/JSON
+data is UTF-8 encoded unless otherwise specified. All query parameters should
+be UTF-8 and URL encoded, i.e.:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span>query-param = URL-ENCODE(UTF8-ENCODE(param=value)).
+</pre></div>
+</div>
+<p>The functions are divided into two categories. Functions specific to searching
+and retrieving of items and the their information such as SEARCH and TV-SEARCH
+and functions that are for site/user account management such as CAPS and
+REGISTER.</p>
+<p>Any conforming implementation should support the CAPS and SEARCH functions.
+Other functions are optional and if not supported will return the “203 Function
+Not Available” when invoked.</p>
+<div class="section" id="caps">
+<h3>CAPS<a class="headerlink" href="#caps" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">CAPS</span></code> function is used to query the server for supported features and
+the protocol version and other meta data relevant to the implementation. This
+function doesn’t require the client to provide any login information but
+can be executed out of “login session”.</p>
+<p><strong>Returned Fields</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>server/version</td>
+<td>The version of the protocol implemented by
+the server. All implementations should be
+backwards compatible.</td>
+</tr>
+<tr class="row-even"><td>limits</td>
+<td>The limit and defaults to the number of
+search results returned.</td>
+</tr>
+<tr class="row-odd"><td>retention</td>
+<td>Server retention (how many days NZB
+information is stored before being purged).</td>
+</tr>
+<tr class="row-even"><td>category</td>
+<td>Defines a searchable category which might
+have any number of subcategories.</td>
+</tr>
+<tr class="row-odd"><td>category/id</td>
+<td>Unique category ID, can be either one of
+the standard category IDs or a site
+specific ID.</td>
+</tr>
+<tr class="row-even"><td>category/name</td>
+<td>Any descriptive name for the category. Can
+be site/language specific.</td>
+</tr>
+<tr class="row-odd"><td>category/description</td>
+<td>A description of the contents of the
+category.</td>
+</tr>
+<tr class="row-even"><td>category/subcat</td>
+<td>A subcategory.</td>
+</tr>
+<tr class="row-odd"><td>category/subcat/id</td>
+<td>Unique category ID, can be either one of
+the standard category IDs or a site
+specific ID.</td>
+</tr>
+<tr class="row-even"><td>category/subcat/name</td>
+<td>Any descriptive name for the category. Can
+be site/language specific.</td>
+</tr>
+<tr class="row-odd"><td>category/subcat/description</td>
+<td>A description of the contents of the
+category.</td>
+</tr>
+<tr class="row-even"><td>groups</td>
+<td>Defines a list of active, indexed usenet
+groups.</td>
+</tr>
+<tr class="row-odd"><td>group/name</td>
+<td>Name of usenet group.</td>
+</tr>
+<tr class="row-even"><td>group/description</td>
+<td>Description of usenet group.</td>
+</tr>
+<tr class="row-odd"><td>group/lastupdate</td>
+<td>Date and time usenet group was last
+updated.</td>
+</tr>
+<tr class="row-even"><td>genres</td>
+<td>Defines a list of active genres.</td>
+</tr>
+<tr class="row-odd"><td>genre/id</td>
+<td>Id of genre.</td>
+</tr>
+<tr class="row-even"><td>genre/name</td>
+<td>Name of genre.</td>
+</tr>
+<tr class="row-odd"><td>genre/categoryid</td>
+<td>The category the genre is associate with.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=caps</span></code></td>
+<td>Caps function, must always be “caps”.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xxx</span></code></td>
+<td>Output format, either “JSON” or “XML. Default is “XML”.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=caps</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+  <span class="nt">&lt;caps&gt;</span>
+    <span class="c">&lt;!-- server information --&gt;</span>
+    <span class="nt">&lt;server</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span> <span class="na">title=</span><span class="s">&quot;Newznab&quot;</span> <span class="na">strapline=</span><span class="s">&quot;A great usenet indexer&quot;</span>
+            <span class="na">email=</span><span class="s">&quot;info@newznab.com&quot;</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/&quot;</span>
+            <span class="na">image=</span><span class="s">&quot;http://servername.com/theme/black/images/banner.jpg&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- limit parameter range --&gt;</span>
+    <span class="nt">&lt;limits</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">default=</span><span class="s">&quot;50&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- the server NZB retention --&gt;</span>
+    <span class="nt">&lt;retention</span> <span class="na">days=</span><span class="s">&quot;400&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- registration available or not --&gt;</span>
+    <span class="nt">&lt;registration</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">open=</span><span class="s">&quot;yes&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">         The search functions available at the server</span>
+<span class="c">         The only currently defined search functions are SEARCH and TV-SEARCH.</span>
+<span class="c">         Any conforming implementation should at least support the basic search.</span>
+<span class="c">         Other search functions are optional.</span>
+<span class="c">    --&gt;</span>
+    <span class="nt">&lt;searching&gt;</span>
+        <span class="nt">&lt;search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tv-search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;movie-search</span> <span class="na">available=</span><span class="s">&quot;no&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/searching&gt;</span>
+
+    <span class="c">&lt;!-- supported categories --&gt;</span>
+    <span class="nt">&lt;categories&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">id=</span><span class="s">&quot;1000&quot;</span> <span class="na">name=</span><span class="s">&quot;Console&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;1010&quot;</span> <span class="na">name=</span><span class="s">&quot;NDS&quot;</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;1020&quot;</span> <span class="na">name=</span><span class="s">&quot;PSP&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/category&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">id=</span><span class="s">&quot;2000&quot;</span> <span class="na">name=</span><span class="s">&quot;Movies&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;2010&quot;</span> <span class="na">name=</span><span class="s">&quot;Foreign&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/category&gt;</span>
+
+        <span class="c">&lt;!-- site specific categories --&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">id=</span><span class="s">&quot;1000001&quot;</span> <span class="na">name=</span><span class="s">&quot;Debian&quot;</span>           <span class="na">description=</span><span class="s">&quot;Latest Debian stuff&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">id=</span><span class="s">&quot;1000002&quot;</span> <span class="na">name=</span><span class="s">&quot;Mandrake 2010&quot;</span>    <span class="na">description=</span><span class="s">&quot;Mandrake 2010&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;1000003&quot;</span> <span class="na">name=</span><span class="s">&quot;Mandrake 2010 HD&quot;</span> <span class="na">description=</span><span class="s">&quot;Mandrake HD stuff&quot;</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;1000004&quot;</span> <span class="na">name=</span><span class="s">&quot;Mandrake 2010 SD&quot;</span> <span class="na">description=</span><span class="s">&quot;Mandrake SD stuff&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/category&gt;</span>
+        <span class="c">&lt;!-- etc.. --&gt;</span>
+    <span class="nt">&lt;/categories&gt;</span>
+  <span class="nt">&lt;/caps&gt;</span>
+<span class="nt">&lt;/xml&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="register">
+<h3>REGISTER<a class="headerlink" href="#register" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">REGISTER</span></code> function is used for automatically creating and registering
+user account.  This is an optional function and may or may not be available at
+a site. It is also possible that function is available but currently
+registrations at the site are closed.</p>
+<p>The only prerequisite for registering an account is a valid email address
+and any server policies.  It is at the server administration discretion to
+allow or deny registrations based on for example the validity of the email
+address or the the current client host address.</p>
+<p>On successful registration a valid username, password and api key are
+returned to the caller.  On error an appropriate error code is returned.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=register</span></code></td>
+<td>Register function, must always be “register”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">email=xxx</span></code></td>
+<td>A valid email address to be used for registration.
+(URL/UTF-8 encoded).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=register&amp;email=john.joe%40acme.com</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;register</span> <span class="na">username=</span><span class="s">&quot;user123&quot;</span> <span class="na">password=</span><span class="s">&quot;pass123&quot;</span> <span class="na">apikey=</span><span class="s">&quot;abcabcd11234abc&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Denial</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=register&amp;email=john.joe%40acme.com</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;103&quot;</span> <span class="na">description=</span><span class="s">&quot;Registration denied&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Registration limit imposed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=register&amp;email=john.joe%40acme.com</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;104&quot;</span> <span class="na">description=</span><span class="s">&quot;No more registrations allowed&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Registration disabled</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=register&amp;email=john.joe%40acme.com</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;203&quot;</span> <span class="na">description=</span><span class="s">&quot;Function not available&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="search">
+<h3>SEARCH<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">SEARCH</span></code> function searches the index for items matching the search
+criteria. On successful search the response contains a list of found items.
+Even if search matched nothing an empty response set is created and returned.
+This function requires passing the user credentials.</p>
+<p>Searches that include categories that are not supported by the server are
+still executed but the non-supported categories are simply skipped. This
+basically treats such a search simply as a “no match” but allows the same
+query to be ran simultaneously against several servers.</p>
+<p>The list of search categories specifies a logical OR condition. I.e. an item
+matching the search input in any of the specified categories is considered a
+match and is returned. E.g. a search searching for “linux” in “computer” and
+“ebook” categories searches for matching items in “computer” and “ebook” but
+does not search for example the “movies” category.  Items found in either
+group are then combined into a single result set. If the input string for
+search is empty all items (within the server/query limits) are returned for
+the matching categories.</p>
+<p>When performing the query the categories to be searched are concatenated into
+a single query parameter by <code class="docutils literal"><span class="pre">,</span></code> (comma). For example <code class="docutils literal"><span class="pre">cat=200,300,400</span></code>,
+which is then URL encoded.</p>
+<p>The returned XML data stream is RSS 2.0 compliant and also contains
+additional information in the extra namespace.</p>
+<p>Response-offset field identifies the current subset of all the matches that
+are being transmitted in the response. In other words, if a search for
+“disco” finds more matches than the server is capable of transmitting in a
+single response, the response needs to be split into several responses. Then
+it is’s the clients responsibility to repeat the same query with same
+parameters but specify an increased offset in order to return the next set of
+results.</p>
+<p>If offset query parameter is not used response data contains items between 0
+offset - limit.  If offset query parameter is out of bounds an empty result
+set is returned.</p>
+<p>Attrs parameter provides a comma “,” separated list of additional (extended)
+attributes that the search should return if they are applicable to the
+current item.  If attrs is not specified a set of default parameters is
+returned.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">What is this set?</p>
+</div>
+<p><strong>Important fields of the returned data (RSS)</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>title</td>
+<td>Title of the found item.</td>
+</tr>
+<tr class="row-even"><td>guid</td>
+<td>A globally unique (GUID) item identifier.</td>
+</tr>
+<tr class="row-odd"><td>pubdate</td>
+<td>The publishing date in RSS date object as specified by
+RFC822/2822. (not the Usenet date)</td>
+</tr>
+<tr class="row-even"><td>category</td>
+<td>The category the NZB belongs to. (This is human readable
+for RSS. More precise category is found in additional data)</td>
+</tr>
+<tr class="row-odd"><td>enclosure</td>
+<td>The NZB url</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=search</span></code></td>
+<td>Search function, must always be “search”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">apikey=xxxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">q=xxxx</span></code></td>
+<td>Search input (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">group=xxxx</span></code></td>
+<td>List of usenet groups to search delimited by “,”</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">limit=123</span></code></td>
+<td>Upper limit for the number of items to be returned.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">cat=xxx</span></code></td>
+<td>List of categories to search delimited by “,”</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xxx</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is “XML”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">attrs=xxx</span></code></td>
+<td>List of requested extended attributes delimeted by “,”</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">extended=1</span></code></td>
+<td>List all extended attributes (attrs ignored)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">del=1</span></code></td>
+<td>Delete the item from a users cart on download.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxage=123</span></code></td>
+<td>Only return results which were posted to usenet in the last
+x days.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">minsize=0</span></code></td>
+<td>Only return results which have a size greater than minsize (bytes).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxsize=1</span></code></td>
+<td>Only return results which have a size less than maxsize (bytes).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">offset=50</span></code></td>
+<td>The 0 based query offset defining which part of the
+response we want.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">sort=val_asc</span></code></td>
+<td>The sorting of the data. Available options being cat, name,
+size, files, stats, posted in the format “value_asc/desc”,
+e.g. &amp;sort=size_desc</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=search&amp;apikey=xxxxx&amp;q=a%20tv%20show</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;channel&gt;</span>
+<span class="nt">&lt;title&gt;</span>example.com<span class="nt">&lt;/tile&gt;</span>
+<span class="nt">&lt;description&gt;</span>example.com API results<span class="nt">&lt;/description&gt;</span>
+<span class="c">&lt;!--</span>
+<span class="c">   More RSS content</span>
+<span class="c"> --&gt;</span>
+
+<span class="c">&lt;!-- offset is the current offset of the response</span>
+<span class="c">     total is the total number of items found by the query</span>
+<span class="c"> --&gt;</span>
+<span class="nt">&lt;newznab:response</span> <span class="na">offset=</span><span class="s">&quot;0&quot;</span> <span class="na">total=</span><span class="s">&quot;2344&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;item&gt;</span>
+  <span class="c">&lt;!-- Standard RSS 2.0 Data --&gt;</span>
+  <span class="nt">&lt;title&gt;</span>A.Public.Domain.Tv.Show.S06E05<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+  <span class="nt">&lt;link&gt;</span>http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c<span class="ni">&amp;amp;</span>i=1<span class="ni">&amp;amp;</span>r=18cf9f0a736041465e3bd521d00a90b9<span class="nt">&lt;/link&gt;</span>
+  <span class="nt">&lt;comments&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c#comments<span class="nt">&lt;/comments&gt;</span>
+  <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+  <span class="nt">&lt;category&gt;</span>TV &gt; XviD<span class="nt">&lt;/category&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Some TV show<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="c">&lt;!-- Additional attributes --&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;2000&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;2030&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>     <span class="na">value=</span><span class="s">&quot;4294967295&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">No items matched the search criteria.</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=search&amp;apikey=xxxxx&amp;q=linux%20image</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;newznab:response</span> <span class="na">offset=</span><span class="s">&quot;0&quot;</span> <span class="na">total=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=search&amp;apikey=xxxxx&amp;q=linux%20image</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span>&#160; <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because it was malformed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=search&amp;apikey=xxxxx&amp;q=linux%20image</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;200&quot;</span> <span class="na">description=</span><span class="s">&quot;Missing parameter: key&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="tv-search">
+<h3>TV-SEARCH<a class="headerlink" href="#tv-search" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">TV-SEARCH</span></code> function searches the index in the TV category for items
+matching the search criteria.  The criteria includes query string and in
+addition information about season and episode. On successful search the
+response contains a list of items that matched the query. Even if the search
+matched nothing an empty but valid response is created and returned. This
+function requires passing the user credentials.</p>
+<p>The returned XML data stream is RSS 2.0 compliant and also contains additional
+information in the extra namespace and optionally TV specific information.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=tvsearch</span></code></td>
+<td>TV-Search function, must always be “tvsearch”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">apikey=xxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">limit=123</span></code></td>
+<td>Upper limit for the number of items to be returned,
+e.g. 123.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">rid=xxxx</span></code></td>
+<td>TVRage id of the item being queried.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">tvmazeid=xxxx</span></code></td>
+<td>TVMaze id of the item being queried.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">tvdbid=xxxx</span></code></td>
+<td>TVDB id of the item being queried.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">cat=xxx</span></code></td>
+<td>List of categories to search delimited by “,”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">season=xxxx</span></code></td>
+<td>Season string, e.g S13 or 13 for the item being
+queried.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">q=xxxx</span></code></td>
+<td>Search input (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ep=xxx</span></code></td>
+<td>Episode string, e.g E13 or 13 for the item being
+queried.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xml</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">attrs=xxx</span></code></td>
+<td>List of requested extended attributes delimeted by “,”</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">extended=1</span></code></td>
+<td>List all extended attributes (attrs ignored)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">del=1</span></code></td>
+<td>Delete the item from a users cart on download.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxage=123</span></code></td>
+<td>Only return results which were posted to usenet in the
+last x days.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">offset=50</span></code></td>
+<td>The 0 based query offset defining which part of the
+response we want.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><strong>Request</strong>:</dt>
+<dd><p class="first last"><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=tvsearch&amp;apikey=xxxq=The%20Beverly%20Hillbillies&amp;season=S01</span></code></p>
+</dd>
+</dl>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+<span class="nt">&lt;title&gt;</span>example.com<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;description&gt;</span>example.com API results<span class="nt">&lt;/description&gt;</span>
+<span class="c">&lt;!--</span>
+<span class="c">  More RSS content</span>
+<span class="c">--&gt;</span>
+
+<span class="c">&lt;!-- offset is the current offset of the response</span>
+<span class="c">     total is the total number of items found by the query</span>
+<span class="c">--&gt;</span>
+<span class="nt">&lt;newznab:response</span> <span class="na">offset=</span><span class="s">&quot;0&quot;</span> <span class="na">total=</span><span class="s">&quot;1234&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;item&gt;</span>
+  <span class="c">&lt;!-- Standard RSS 2.0 data --&gt;</span>
+  <span class="nt">&lt;title&gt;</span>A.Public.Domain.Tv.Show.S06E05<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+  <span class="nt">&lt;link&gt;</span>http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c<span class="ni">&amp;amp;</span>i=1<span class="ni">&amp;amp;</span>r=18cf9f0a736041465e3bd521d00a90b9<span class="nt">&lt;/link&gt;</span>
+  <span class="nt">&lt;comments&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c#comments<span class="nt">&lt;/comments&gt;</span>
+  <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+  <span class="nt">&lt;category&gt;</span>TV &gt; XviD<span class="nt">&lt;/category&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Some TV show<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="c">&lt;!-- Additional attributes --&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;5030&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>     <span class="na">value=</span><span class="s">&quot;154653309&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;season&quot;</span>   <span class="na">value=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;episode&quot;</span>  <span class="na">value=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/item&gt;</span>
+
+<span class="nt">&lt;item&gt;</span>
+  <span class="c">&lt;!-- Standard RSS 2.0 data --&gt;</span>
+  <span class="nt">&lt;title&gt;</span>A.Public.Domain.Tv.Show.S06E05<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+  <span class="nt">&lt;link&gt;</span>http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c<span class="ni">&amp;amp;</span>i=1<span class="ni">&amp;amp;</span>r=18cf9f0a736041465e3bd521d00a90b9<span class="nt">&lt;/link&gt;</span>
+  <span class="nt">&lt;comments&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c#comments<span class="nt">&lt;/comments&gt;</span>
+  <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+  <span class="nt">&lt;category&gt;</span>TV &gt; XviD<span class="nt">&lt;/category&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Some TV show<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="c">&lt;!-- Additional attributes --&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;5000&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;5030&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>     <span class="na">value=</span><span class="s">&quot;4294967295&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;season&quot;</span>   <span class="na">value=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;episode&quot;</span>  <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/item&gt;</span>
+
+<span class="c">&lt;!-- more items to follow --&gt;</span>
+
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="movie-search">
+<h3>MOVIE-SEARCH<a class="headerlink" href="#movie-search" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">MOVIE-SEARCH</span></code> function searches the index for items matching an IMDb ID or
+search query.  On successful search the response contains a list of items that
+matched the query. Even if the search matched nothing an empty but valid
+response is created and returned. This function requires passing the user
+credentials.</p>
+<p>The returned XML data stream is RSS 2.0 compliant and also contains additional
+information in the extra namespace and optionally movie specific information.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=movie</span></code></td>
+<td>Movie-Search function, must always be “movie”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">apikey=xxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">limit=123</span></code></td>
+<td>Upper limit for the number of items to be returned,
+e.g. 123.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">imdbid=xxxx</span></code></td>
+<td>IMDB id of the item being queried e.g. 0058935.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">cat=xxx</span></code></td>
+<td>List of categories to search delimited by “,”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">genre=xxx</span></code></td>
+<td>A genre string i.e. ‘Romance’ would match ‘(Comedy,
+Drama, Indie, Romance)’</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">q=xxxx</span></code></td>
+<td>Search input (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">o=xml</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">attrs=xxx</span></code></td>
+<td>List of requested extended attributes delimeted by “,”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">extended=1</span></code></td>
+<td>List all extended attributes (attrs ignored)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">del=1</span></code></td>
+<td>Delete the item from a users cart on download.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">maxage=123</span></code></td>
+<td>Only return results which were posted to usenet in the
+last x days.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">offset=50</span></code></td>
+<td>The 0 based query offset defining which part of the
+response we want.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=movie&amp;apikey=xxx&amp;imdbid=0019798</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;title&gt;</span>example.com<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;description&gt;</span>example.com API results<span class="nt">&lt;/description&gt;</span>
+    <span class="c">&lt;!--</span>
+<span class="c">      More RSS content</span>
+<span class="c">    --&gt;</span>
+
+    <span class="c">&lt;!-- offset is the current offset of the response</span>
+<span class="c">         total is the total number of items found by the query</span>
+<span class="c">    --&gt;</span>
+    <span class="nt">&lt;newznab:response</span> <span class="na">offset=</span><span class="s">&quot;0&quot;</span> <span class="na">total=</span><span class="s">&quot;1234&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;item&gt;</span>
+      <span class="c">&lt;!-- Standard RSS 2.0 data --&gt;</span>
+      <span class="nt">&lt;title&gt;</span>A.Public.Domain.Movie.720p.DTS.x264<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+      <span class="nt">&lt;link&gt;</span>http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c<span class="ni">&amp;amp;</span>i=1<span class="ni">&amp;amp;</span>r=18cf9f0a736041465e3bd521d00a90b9<span class="nt">&lt;/link&gt;</span>
+      <span class="nt">&lt;comments&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c#comments<span class="nt">&lt;/comments&gt;</span>
+      <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+      <span class="nt">&lt;category&gt;</span>Movie &gt; XviD<span class="nt">&lt;/category&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Some movie<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+
+      <span class="c">&lt;!-- Additional attributes --&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;2000&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;2030&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>     <span class="na">value=</span><span class="s">&quot;4294967295&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/item&gt;</span>
+
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="music-search">
+<h3>MUSIC-SEARCH<a class="headerlink" href="#music-search" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">MUSIC-SEARCH</span></code> function searches the index for items matching music properties.
+On successful search the response contains a list of items that matched the
+query. Even if the search matched nothing an empty but valid response is
+created and returned. This function requires passing the user credentials.</p>
+<p>The returned XML data stream is RSS 2.0 compliant and also contains additional
+information in the extra namespace and optionally music specific information.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=music</span></code></td>
+<td>Music-Search function, must always be “music”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">apikey=xxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">limit=123</span></code></td>
+<td>Upper limit for the number of items to be returned,
+e.g. 123.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">album=xxxx</span></code></td>
+<td>Album title (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">artist=xxxx</span></code></td>
+<td>Artist name (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">label=xxxx</span></code></td>
+<td>Publisher/Label name (URL/UTF-8 encoded). Case
+insensitive.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">track=xxxx</span></code></td>
+<td>Track name (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">year=xxxx</span></code></td>
+<td>Four digit year of release.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">genre=123</span></code></td>
+<td>List of music genre id’s to search delimited by “,”.
+See CAPS for available genres.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">cat=xxx</span></code></td>
+<td>List of categories to search delimited by “,”</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xml</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">attrs=xxx</span></code></td>
+<td>List of requested extended attributes delimited by “,”</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">extended=1</span></code></td>
+<td>List all extended attributes (attrs ignored)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">del=1</span></code></td>
+<td>Delete the item from a users cart on download.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxage=123</span></code></td>
+<td>Only return results which were posted to usenet in the
+last x days.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">offset=50</span></code></td>
+<td>The 0 based query offset defining which part of the
+response we want.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=music&amp;apikey=xxx&amp;album=Groovy&amp;extended=1</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;title&gt;</span>example.com<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;description&gt;</span>example.com API results<span class="nt">&lt;/description&gt;</span>
+    <span class="c">&lt;!--</span>
+<span class="c">      More RSS content</span>
+<span class="c">    --&gt;</span>
+
+    <span class="c">&lt;!-- offset is the current offset of the response</span>
+<span class="c">         total is the total number of items found by the query</span>
+<span class="c">    --&gt;</span>
+    <span class="nt">&lt;newznab:response</span> <span class="na">offset=</span><span class="s">&quot;0&quot;</span> <span class="na">total=</span><span class="s">&quot;1234&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;item&gt;</span>
+      <span class="c">&lt;!-- Standard RSS 2.0 data --&gt;</span>
+      <span class="nt">&lt;title&gt;</span>A.Public.Domain.Album.Name<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+      <span class="nt">&lt;link&gt;</span>http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c<span class="ni">&amp;amp;</span>i=1<span class="ni">&amp;amp;</span>r=18cf9f0a736041465e3bd521d00a90b9<span class="nt">&lt;/link&gt;</span>
+      <span class="nt">&lt;comments&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c#comments<span class="nt">&lt;/comments&gt;</span>
+      <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+      <span class="nt">&lt;category&gt;</span>Music &gt; MP3<span class="nt">&lt;/category&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Some music<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+
+      <span class="c">&lt;!-- Additional attributes --&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;3000&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;3010&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>     <span class="na">value=</span><span class="s">&quot;144967295&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;artist&quot;</span>   <span class="na">value=</span><span class="s">&quot;Bob Smith&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;album&quot;</span>    <span class="na">value=</span><span class="s">&quot;Groovy Tunes&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;publisher&quot;</span> <span class="na">value=</span><span class="s">&quot;Epic Music&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;year&quot;</span>     <span class="na">value=</span><span class="s">&quot;2011&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;tracks&quot;</span>   <span class="na">value=</span><span class="s">&quot;track one|track two|track three&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;coverurl&quot;</span> <span class="na">value=</span><span class="s">&quot;http://servername.com/covers/music/12345.jpg&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;review&quot;</span>   <span class="na">value=</span><span class="s">&quot;This album is great&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/item&gt;</span>
+
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="book-search">
+<h3>BOOK-SEARCH<a class="headerlink" href="#book-search" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">BOOK-SEARCH</span></code> function searches the index for items matching book properties.
+On successful search the response contains a list of items that matched the
+query. Even if the search matched nothing an empty but valid response is
+created and returned. This function requires passing the user credentials.</p>
+<p>The returned XML data stream is RSS 2.0 compliant and also contains additional
+information in the extra namespace and optionally music specific information.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=book</span></code></td>
+<td>Book-Search function, must always be “book”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">apikey=xxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">limit=123</span></code></td>
+<td>Upper limit for the number of items to be returned,
+e.g. 123.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">title=xxxx</span></code></td>
+<td>Book title (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">author=xxxx</span></code></td>
+<td>Author name (URL/UTF-8 encoded). Case insensitive.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">o=xml</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">attrs=xxx</span></code></td>
+<td>List of requested extended attributes delimited by “,”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">extended=1</span></code></td>
+<td>List all extended attributes (attrs ignored)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">del=1</span></code></td>
+<td>Delete the item from a users cart on download.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">maxage=123</span></code></td>
+<td>Only return results which were posted to usenet in the
+last x days.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">offset=50</span></code></td>
+<td>The 0 based query offset defining which part of the
+response we want.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=book&amp;apikey=xxx&amp;author=Charles%20Dack&amp;extended=1</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;title&gt;</span>example.com<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;description&gt;</span>example.com API results<span class="nt">&lt;/description&gt;</span>
+    <span class="c">&lt;!--</span>
+<span class="c">      More RSS content</span>
+<span class="c">    --&gt;</span>
+
+    <span class="c">&lt;!-- offset is the current offset of the response</span>
+<span class="c">         total is the total number of items found by the query</span>
+<span class="c">    --&gt;</span>
+    <span class="nt">&lt;newznab:response</span> <span class="na">offset=</span><span class="s">&quot;0&quot;</span> <span class="na">total=</span><span class="s">&quot;1234&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;item&gt;</span>
+      <span class="c">&lt;!-- Standard RSS 2.0 data --&gt;</span>
+      <span class="nt">&lt;title&gt;</span>A.Public.Domain.Book.Name<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+      <span class="nt">&lt;link&gt;</span>http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c<span class="ni">&amp;amp;</span>i=1<span class="ni">&amp;amp;</span>r=18cf9f0a736041465e3bd521d00a90b9<span class="nt">&lt;/link&gt;</span>
+      <span class="nt">&lt;comments&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c#comments<span class="nt">&lt;/comments&gt;</span>
+      <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+      <span class="nt">&lt;category&gt;</span>Book &gt; Ebook<span class="nt">&lt;/category&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Some book<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+
+      <span class="c">&lt;!-- Additional attributes --&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;7020&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>     <span class="na">value=</span><span class="s">&quot;144967295&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;author&quot;</span>   <span class="na">value=</span><span class="s">&quot;Charles Dack&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span>    <span class="na">value=</span><span class="s">&quot;Weather and Folk Lore of Peterborough and District&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;review&quot;</span>   <span class="na">value=</span><span class="s">&quot;This book is a classic&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/item&gt;</span>
+
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="details">
+<h3>DETAILS<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">DETAILS</span></code> function returns all information for a particular Usenet (NZB) item.
+The response contains the generic RSS part + full extra information + full
+type/category specific information.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=details</span></code></td>
+<td>Details function, must always be “details”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">id=xxxx</span></code></td>
+<td>The GUID of the item being queried.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">apikey=xxxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xxx</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=details&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+  <span class="nt">&lt;item&gt;</span>
+    <span class="c">&lt;!-- Standard RSS 2.0 Data --&gt;</span>
+    <span class="nt">&lt;title&gt;</span>A.Public.Domain.Tv.Show.S06E05<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+    <span class="nt">&lt;link&gt;</span>http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c<span class="ni">&amp;amp;</span>i=1<span class="ni">&amp;amp;</span>r=18cf9f0a736041465e3bd521d00a90b9<span class="nt">&lt;/link&gt;</span>
+    <span class="nt">&lt;comments&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c#comments<span class="nt">&lt;/comments&gt;</span>
+    <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+    <span class="nt">&lt;category&gt;</span>TV &gt; XviD<span class="nt">&lt;/category&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Some TV show<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/rss/nzb/e9c515e02346086e3a477a5436d7bc8c&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">         Additional attributes</span>
+<span class="c">         Details function returns all possible attributes that are 1) known and 2) applicable</span>
+<span class="c">         for the item requested.</span>
+<span class="c">    --&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span>   <span class="na">value=</span><span class="s">&quot;2000&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span>   <span class="na">value=</span><span class="s">&quot;2030&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>       <span class="na">value=</span><span class="s">&quot;4294967295&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;files&quot;</span>      <span class="na">value=</span><span class="s">&quot;107&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;poster&quot;</span>     <span class="na">value=</span><span class="s">&quot;example@example.net (example)&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;grabs&quot;</span>      <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;comments&quot;</span>   <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;usenetdate&quot;</span> <span class="na">value=</span><span class="s">&quot;Tue, 22 Jun 2010 06:54:22 +0100&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;group&quot;</span>      <span class="na">value=</span><span class="s">&quot;alt.binaries.tv&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because it was malformed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=details&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;200&quot;</span> <span class="na">description=</span><span class="s">&quot;Missing parameter: key&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because no such item was available</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=details&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such GUID&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=details&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="getnfo">
+<h3>GETNFO<a class="headerlink" href="#getnfo" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">GETNFO</span></code> function returns an nfo file for a particular Usenet (NZB) item.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd>t=getnfo          Details function, must always be “getnfo”.
+id=xxxx           The GUID of the item being queried.
+apikey=xxxx       User’s key as provided by the service provider.</dd>
+<dt><strong>Optional parameters</strong></dt>
+<dd>raw=1             If provided returns just the nfo file without the rss container
+o=xxx             Output format, either “JSON” or “XML”. Default is “XML”.</dd>
+</dl>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=getnfo&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+  <span class="nt">&lt;item&gt;</span>
+    <span class="c">&lt;!-- Standard RSS 2.0 Data --&gt;</span>
+    <span class="nt">&lt;title&gt;</span>A.Public.Domain.Tv.Show.S06E05<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/details/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+    <span class="nt">&lt;link&gt;</span>http://servername.com/nfo/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/link&gt;</span>
+    <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+    <span class="nt">&lt;description&gt;</span>This is the nfo file<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;enclosure</span> <span class="na">url=</span><span class="s">&quot;http://servername.com/nfo/e9c515e02346086e3a477a5436d7bc8c&amp;ampenclosure=1&amp;amp;i=1&amp;amp;r=18cf9f0a736041465e3bd521d00a90b9&quot;</span> <span class="na">length=</span><span class="s">&quot;154653309&quot;</span> <span class="na">type=</span><span class="s">&quot;application/x-nzb&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because it was malformed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=getnfo&amp;apikey=xxxxx&amp;id=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;200&quot;</span> <span class="na">description=</span><span class="s">&quot;Missing parameter: id&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because no such item was available</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=getnfo&amp;apikey=xxxxx&amp;id=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such GUID&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=getnfo&amp;apikey=xxxxx&amp;id=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="get">
+<h3>GET<a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">GET</span></code> function returns an nzb for a guid.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd>t=get             Details function, must always be “get”.
+id=xxxx           The GUID of the item being queried.
+apikey=xxxx       User’s key as provided by the service provider.</dd>
+<dt><strong>Optional parameters</strong></dt>
+<dd>del=1             If provided removes the nzb from the users cart (if present)</dd>
+</dl>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Normal behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=get&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cp">&lt;!DOCTYPE nzb PUBLIC &quot;-//newzBin//DTD NZB 1.1//EN&quot; &quot;http://www.newzbin.com/DTD/nzb/nzb-1.1.dtd&quot;&gt;</span>
+<span class="nt">&lt;nzb</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.newzbin.com/DTD/2003/nzb&quot;</span><span class="nt">&gt;</span>
+...
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because it was malformed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=get&amp;apikey=xxxxx&amp;id=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;200&quot;</span> <span class="na">description=</span><span class="s">&quot;Missing parameter: id&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because no such item was available</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=get&amp;apikey=xxxxx&amp;id=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such GUID&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=get&amp;apikey=xxxxx&amp;id=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="cart-add">
+<h3>CART-ADD<a class="headerlink" href="#cart-add" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">CART-ADD</span></code> function adds an item to the users cart.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=cartadd</span></code></td>
+<td>Cart add function, must always be “cartadd”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">id=xxxx</span></code></td>
+<td>The GUID of the item being added to the cart.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">apikey=xxxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xxx</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Default behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartadd&amp;id=12344234234234&amp;apikey=xxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;cartadd</span> <span class="na">id=</span><span class="s">&quot;123&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because it was malformed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartadd&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;200&quot;</span> <span class="na">description=</span><span class="s">&quot;Missing parameter: id&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because no such item was available</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartadd&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such GUID&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartadd&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because item already exists</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartadd&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;310&quot;</span> <span class="na">description=</span><span class="s">&quot;Item already exists&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="cart-del">
+<h3>CART-DEL<a class="headerlink" href="#cart-del" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">CART-DEL</span></code> function deletes an item from the users cart.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=cartdel</span></code></td>
+<td>Cart del function, must always be “cartdel”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">id=xxxx</span></code></td>
+<td>The GUID of the item being delete from the cart.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">apikey=xxxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xxx</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Default behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartdel&amp;id=12344234234234&amp;apikey=xxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;cartdel</span> <span class="na">id=</span><span class="s">&quot;123&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because it was malformed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartdel&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;200&quot;</span> <span class="na">description=</span><span class="s">&quot;Missing parameter: id&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because no such item was available</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartdel&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such GUID&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=cartdel&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="comments">
+<h3>COMMENTS<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">COMMENTS</span></code> function returns all comments known about a release.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=comments</span></code></td>
+<td>Comments function, must always be “comments”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">guid=xxxx</span></code></td>
+<td>The GUID of the item being queried.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">apikey=xxxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xxx</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first">Default behavior</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=comments&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+  <span class="nt">&lt;item&gt;</span>
+    <span class="c">&lt;!-- Standard RSS 2.0 Data --&gt;</span>
+    <span class="nt">&lt;title&gt;</span>username_of_poster<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/guid&gt;</span>
+    <span class="nt">&lt;link&gt;</span>http://servername.com/rss/viewnzb/e9c515e02346086e3a477a5436d7bc8c<span class="nt">&lt;/link&gt;</span>
+    <span class="nt">&lt;pubDate&gt;</span>Sun, 06 Jun 2010 17:29:23 +0100<span class="nt">&lt;/pubDate&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Comment about the item<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because it was malformed</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=comments&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;200&quot;</span> <span class="na">description=</span><span class="s">&quot;Missing parameter: key&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because no such item was available</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=comments&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such GUID&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=comments&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="comments-add">
+<h3>COMMENTS-ADD<a class="headerlink" href="#comments-add" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">COMMENTS-ADD</span></code> function adds a comment to a release.</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=commentadd</span></code></td>
+<td>Comments-add function, must always be “commentadd”.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">guid=xxxx</span></code></td>
+<td>The GUID of the item being queried.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">apikey=xxxx</span></code></td>
+<td>User’s key as provided by the service provider.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">text=xxxx</span></code></td>
+<td>The comment being added (URL/UTF-8 encoded).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">o=xxx</span></code></td>
+<td>Output format, either “JSON” or “XML”. Default is
+“XML”.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first"><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=commentadd&amp;apikey=xxxxx&amp;guid=xxxxxxxxx&amp;text=comment</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;commentadd</span> <span class="na">id=</span><span class="s">&quot;123&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=commentadd&amp;apikey=xxxxx&amp;guid=xxxxxxxxx&amp;text=comment</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such item&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=commentadd&amp;apikey=xxxxx&amp;guid=xxxxxxxxx&amp;text=comment</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;203&quot;</span> <span class="na">description=</span><span class="s">&quot;Function not available&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="user">
+<h3>USER<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">USER</span></code> function is used for retrieving information about a user account</p>
+<p><strong>HTTP Method</strong></p>
+<blockquote>
+<div>GET</div></blockquote>
+<p><strong>HTTP Response</strong></p>
+<blockquote>
+<div>200 OK</div></blockquote>
+<p><strong>Parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t=user</span></code></td>
+<td>User function, must always be “user”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">username=xxx</span></code></td>
+<td>A valid username (URL/UTF-8 encoded).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<ol class="arabic">
+<li><p class="first"><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=user&amp;username=user123</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;user123&quot;</span> <span class="na">grabs=</span><span class="s">&quot;123&quot;</span> <span class="na">role=</span><span class="s">&quot;User&quot;</span> <span class="na">apirequests=</span><span class="s">&quot;100&quot;</span> <span class="na">downloadrequests=</span><span class="s">&quot;100&quot;</span>
+<span class="na">movieview=</span><span class="s">&quot;1&quot;</span> <span class="na">musicview=</span><span class="s">&quot;1&quot;</span> <span class="na">consoleview=</span><span class="s">&quot;1&quot;</span> <span class="na">createddate=</span><span class="s">&quot;2011-08-23 12:31:47&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=user&amp;username=user123</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;300&quot;</span> <span class="na">description=</span><span class="s">&quot;No such item&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">HTTP://servername.com/api?t=user&amp;username=user123</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;203&quot;</span> <span class="na">description=</span><span class="s">&quot;Function not available&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="predefined-categories">
+<h2>Predefined Categories<a class="headerlink" href="#predefined-categories" title="Permalink to this headline">¶</a></h2>
+<p>In order to facilitate operation that does not rely on a particular natural
+language, e.g. english a set of predefined category IDs have been defined. It
+is possible to define custom categories  in the custom category range. Each
+category is given a range for a set of subcategories. It is possible for an
+item to belong to several categories at the same time.</p>
+<p><strong>Category Ranges</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="21%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Category Range</th>
+<th class="head">Category Name</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0000-0999</td>
+<td>Reserved</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>1000-1999</td>
+<td>Console</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>2000-2999</td>
+<td>Movies</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>3000-3999</td>
+<td>Audio</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>4000-4999</td>
+<td>PC</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5000-5999</td>
+<td>TV</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>6000-6999</td>
+<td>XXX</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7000-7999</td>
+<td>Books</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>8000-8999</td>
+<td>Other</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>9000-99999</td>
+<td>Reserved</td>
+<td>Reserved for future expansion</td>
+</tr>
+<tr class="row-even"><td>100000-</td>
+<td>Custom</td>
+<td>Site specific category range.
+Defined in CAPS.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Category List</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Categories</th>
+<th class="head">Category Name</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0000</td>
+<td>Reserved</td>
+</tr>
+<tr class="row-odd"><td>1000</td>
+<td>Console</td>
+</tr>
+<tr class="row-even"><td>1010</td>
+<td>Console/NDS</td>
+</tr>
+<tr class="row-odd"><td>1020</td>
+<td>Console/PSP</td>
+</tr>
+<tr class="row-even"><td>1030</td>
+<td>Console/Wii</td>
+</tr>
+<tr class="row-odd"><td>1040</td>
+<td>Console/XBox</td>
+</tr>
+<tr class="row-even"><td>1050</td>
+<td>Console/XBox 360</td>
+</tr>
+<tr class="row-odd"><td>1060</td>
+<td>Console/Wiiware</td>
+</tr>
+<tr class="row-even"><td>1070</td>
+<td>Console/XBox 360 DLC</td>
+</tr>
+<tr class="row-odd"><td>2000</td>
+<td>Movies</td>
+</tr>
+<tr class="row-even"><td>2010</td>
+<td>Movies/Foreign</td>
+</tr>
+<tr class="row-odd"><td>2020</td>
+<td>Movies/Other</td>
+</tr>
+<tr class="row-even"><td>2030</td>
+<td>Movies/SD</td>
+</tr>
+<tr class="row-odd"><td>2040</td>
+<td>Movies/HD</td>
+</tr>
+<tr class="row-even"><td>2045</td>
+<td>Movies/UHD</td>
+</tr>
+<tr class="row-odd"><td>2050</td>
+<td>Movies/BluRay</td>
+</tr>
+<tr class="row-even"><td>2060</td>
+<td>Movies/3D</td>
+</tr>
+<tr class="row-odd"><td>3000</td>
+<td>Audio</td>
+</tr>
+<tr class="row-even"><td>3010</td>
+<td>Audio/MP3</td>
+</tr>
+<tr class="row-odd"><td>3020</td>
+<td>Audio/Video</td>
+</tr>
+<tr class="row-even"><td>3030</td>
+<td>Audio/Audiobook</td>
+</tr>
+<tr class="row-odd"><td>3040</td>
+<td>Audio/Lossless</td>
+</tr>
+<tr class="row-even"><td>4000</td>
+<td>PC</td>
+</tr>
+<tr class="row-odd"><td>4010</td>
+<td>PC/0day</td>
+</tr>
+<tr class="row-even"><td>4020</td>
+<td>PC/ISO</td>
+</tr>
+<tr class="row-odd"><td>4030</td>
+<td>PC/Mac</td>
+</tr>
+<tr class="row-even"><td>4040</td>
+<td>PC/Mobile-Other</td>
+</tr>
+<tr class="row-odd"><td>4050</td>
+<td>PC/Games</td>
+</tr>
+<tr class="row-even"><td>4060</td>
+<td>PC/Mobile-iOS</td>
+</tr>
+<tr class="row-odd"><td>4070</td>
+<td>PC/Mobile-Android</td>
+</tr>
+<tr class="row-even"><td>5000</td>
+<td>TV</td>
+</tr>
+<tr class="row-odd"><td>5020</td>
+<td>TV/Foreign</td>
+</tr>
+<tr class="row-even"><td>5030</td>
+<td>TV/SD</td>
+</tr>
+<tr class="row-odd"><td>5040</td>
+<td>TV/HD</td>
+</tr>
+<tr class="row-even"><td>5045</td>
+<td>TV/UHD</td>
+</tr>
+<tr class="row-odd"><td>5050</td>
+<td>TV/Other</td>
+</tr>
+<tr class="row-even"><td>5060</td>
+<td>TV/Sport</td>
+</tr>
+<tr class="row-odd"><td>5070</td>
+<td>TV/Anime</td>
+</tr>
+<tr class="row-even"><td>5080</td>
+<td>TV/Documentary</td>
+</tr>
+<tr class="row-odd"><td>6000</td>
+<td>XXX</td>
+</tr>
+<tr class="row-even"><td>6010</td>
+<td>XXX/DVD</td>
+</tr>
+<tr class="row-odd"><td>6020</td>
+<td>XXX/WMV</td>
+</tr>
+<tr class="row-even"><td>6030</td>
+<td>XXX/XviD</td>
+</tr>
+<tr class="row-odd"><td>6040</td>
+<td>XXX/x264</td>
+</tr>
+<tr class="row-even"><td>6050</td>
+<td>XXX/Pack</td>
+</tr>
+<tr class="row-odd"><td>6060</td>
+<td>XXX/ImgSet</td>
+</tr>
+<tr class="row-even"><td>6070</td>
+<td>XXX/Other</td>
+</tr>
+<tr class="row-odd"><td>7000</td>
+<td>Books</td>
+</tr>
+<tr class="row-even"><td>7010</td>
+<td>Books/Mags</td>
+</tr>
+<tr class="row-odd"><td>7020</td>
+<td>Books/EBook</td>
+</tr>
+<tr class="row-even"><td>7030</td>
+<td>Books/Comics</td>
+</tr>
+<tr class="row-odd"><td>8000</td>
+<td>Other</td>
+</tr>
+<tr class="row-even"><td>8010</td>
+<td>Other/Misc</td>
+</tr>
+<tr class="row-odd"><td>100000-</td>
+<td>Custom</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="predefined-attributes">
+<h2>Predefined Attributes<a class="headerlink" href="#predefined-attributes" title="Permalink to this headline">¶</a></h2>
+<p>A set of known attributes for items in different categories has been defined.
+Its possible that not all attributes are available at all times. Therefore a
+client application should not rely on any particular attributes being in the
+returned data but should take this list as an optional extra information.
+However attributes marked with * are always available.</p>
+<p>Additionally, not all attributes are applicable to all items. The category
+information can be used to check which attributes area available for which
+category items.</p>
+<p>All attributes are defined using XML namespace syntax.
+e.g. xmlns:newznab=”http://www.newznab.com/DTD/2010/feeds/attributes/”</p>
+<div class="section" id="list-of-attributes">
+<h3>List of Attributes<a class="headerlink" href="#list-of-attributes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="16%" />
+<col width="27%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">Category</th>
+<th class="head">Description</th>
+<th class="head">Example value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>size *</td>
+<td>ALL</td>
+<td>Size in bytes</td>
+<td>“252322”</td>
+</tr>
+<tr class="row-odd"><td>category *</td>
+<td>ALL</td>
+<td>Item’s category</td>
+<td>“5004”</td>
+</tr>
+<tr class="row-even"><td>guid</td>
+<td>ALL</td>
+<td>Unique release guid</td>
+<td>“6c6734da3e92a7b0e494e896b58081da”</td>
+</tr>
+<tr class="row-odd"><td>files</td>
+<td>ALL</td>
+<td>Number of files</td>
+<td>“4”</td>
+</tr>
+<tr class="row-even"><td>poster</td>
+<td>ALL</td>
+<td>NNTP Poster</td>
+<td>“<a class="reference external" href="mailto:yenc&#37;&#52;&#48;power-post">yenc<span>&#64;</span>power-post</a>”</td>
+</tr>
+<tr class="row-odd"><td>group</td>
+<td>ALL</td>
+<td>NNTP Group(s)</td>
+<td>“a.b.group, a.b.tv”</td>
+</tr>
+<tr class="row-even"><td>team</td>
+<td>ALL</td>
+<td>Team doing the release</td>
+<td>“Team”</td>
+</tr>
+<tr class="row-odd"><td>grabs</td>
+<td>ALL</td>
+<td>Number of times item downloaded</td>
+<td>“1”</td>
+</tr>
+<tr class="row-even"><td>password</td>
+<td>ALL</td>
+<td>Whether the archive is passworded</td>
+<td>“0” no, “1” rar pass, “2” contains inner archive</td>
+</tr>
+<tr class="row-odd"><td>comments</td>
+<td>ALL</td>
+<td>Number of comments</td>
+<td>“2”</td>
+</tr>
+<tr class="row-even"><td>usenetdate</td>
+<td>ALL</td>
+<td>Date posted to usenet</td>
+<td>“Tue, 22 Jun 2010 06:54:22 +0100”</td>
+</tr>
+<tr class="row-odd"><td>nfo</td>
+<td>ALL</td>
+<td>Has an nfo or not</td>
+<td>“1”</td>
+</tr>
+<tr class="row-even"><td>info</td>
+<td>ALL</td>
+<td>Info (.nfo) file URL</td>
+<td>“<a class="reference external" href="http://site/api?t=getnfo&amp;id=492296e74a91412aa09aef655fda75e7&amp;raw=1">http://site/api?t=getnfo&amp;id=492296e74a91412aa09aef655fda75e7&amp;raw=1</a>”</td>
+</tr>
+<tr class="row-odd"><td>year</td>
+<td>ALL</td>
+<td>Release year</td>
+<td>“2009”</td>
+</tr>
+<tr class="row-even"><td>season</td>
+<td>TV</td>
+<td>Numeric season</td>
+<td>“1”</td>
+</tr>
+<tr class="row-odd"><td>episode</td>
+<td>TV</td>
+<td>Numeric episode within the season</td>
+<td>“1”</td>
+</tr>
+<tr class="row-even"><td>rageid</td>
+<td>TV</td>
+<td>TVRage ID. (www.tvrage.com)</td>
+<td>“2322”</td>
+</tr>
+<tr class="row-odd"><td>tvtitle</td>
+<td>TV</td>
+<td>TVRage Show Title. (www.tvrage.com)</td>
+<td>“The Show Title”</td>
+</tr>
+<tr class="row-even"><td>tvairdate</td>
+<td>TV</td>
+<td>TVRage Show Air date. (www.tvrage.com)</td>
+<td>“Tue, 22 Jun 2010 06:54:22 +0100”</td>
+</tr>
+<tr class="row-odd"><td>video</td>
+<td>TV, Movies</td>
+<td>Video codec</td>
+<td>“x264”</td>
+</tr>
+<tr class="row-even"><td>audio</td>
+<td>TV, Movies, Audio</td>
+<td>Audio codec</td>
+<td>“AC3 2.0 &#64; 384 kbs”</td>
+</tr>
+<tr class="row-odd"><td>resolution</td>
+<td>TV, Movies</td>
+<td>Video resolution</td>
+<td>“1280x716 1.78:1”</td>
+</tr>
+<tr class="row-even"><td>framerate</td>
+<td>TV, Movies</td>
+<td>Video fps</td>
+<td>“23.976 fps”</td>
+</tr>
+<tr class="row-odd"><td>language</td>
+<td>TV, Movies, Audio</td>
+<td>Natural languages</td>
+<td>“English”</td>
+</tr>
+<tr class="row-even"><td>subs</td>
+<td>TV, Movies</td>
+<td>Subtitles</td>
+<td>“English, Spanish”</td>
+</tr>
+<tr class="row-odd"><td>imdb</td>
+<td>Movies</td>
+<td>IMDb ID  (www.imdb.com)</td>
+<td>“0104409”</td>
+</tr>
+<tr class="row-even"><td>imdbscore</td>
+<td>Movies</td>
+<td>IMDb score</td>
+<td>“5/10”</td>
+</tr>
+<tr class="row-odd"><td>imdbtitle</td>
+<td>Movies</td>
+<td>IMDb score</td>
+<td>“Bobs Movie”</td>
+</tr>
+<tr class="row-even"><td>imdbtagline</td>
+<td>Movies</td>
+<td>IMDb tagline</td>
+<td>“Bobs new adventure”</td>
+</tr>
+<tr class="row-odd"><td>imdbplot</td>
+<td>Movies</td>
+<td>IMDb plot</td>
+<td>“All about the movie”</td>
+</tr>
+<tr class="row-even"><td>imdbyear</td>
+<td>Movies</td>
+<td>IMDb year</td>
+<td>“1971”</td>
+</tr>
+<tr class="row-odd"><td>imdbdirector</td>
+<td>Movies</td>
+<td>IMDb director</td>
+<td>“Bob Smith”</td>
+</tr>
+<tr class="row-even"><td>imdbactors</td>
+<td>Movies</td>
+<td>IMDb actors</td>
+<td>“Bob Smith, Kate Smith”</td>
+</tr>
+<tr class="row-odd"><td>genre</td>
+<td>TV, Movies</td>
+<td>Genre</td>
+<td>“Horror, Comedy”</td>
+</tr>
+<tr class="row-even"><td>artist</td>
+<td>Music</td>
+<td>Artist name</td>
+<td>“Bob Smith”</td>
+</tr>
+<tr class="row-odd"><td>album</td>
+<td>Music</td>
+<td>Album name</td>
+<td>“Groovy Tunes”</td>
+</tr>
+<tr class="row-even"><td>publisher</td>
+<td>Music, Book</td>
+<td>Publisher name</td>
+<td>“Epic Music”</td>
+</tr>
+<tr class="row-odd"><td>tracks</td>
+<td>Music</td>
+<td>Track listing</td>
+<td>“track one|track two|track three”</td>
+</tr>
+<tr class="row-even"><td>coverurl</td>
+<td>TV, Movies, Music, Book</td>
+<td>URL to cover image</td>
+<td>“<a class="reference external" href="http://servername.com/covers/music/12345.jpg">http://servername.com/covers/music/12345.jpg</a>”</td>
+</tr>
+<tr class="row-odd"><td>backdropcoverurl</td>
+<td>TV, Movies, Music</td>
+<td>URL to backdrop image</td>
+<td>“<a class="reference external" href="http://servername.com/covers/movies/12345-backdrop.jpg">http://servername.com/covers/movies/12345-backdrop.jpg</a>”</td>
+</tr>
+<tr class="row-even"><td>review</td>
+<td>Movies, Music, Book</td>
+<td>Critics review</td>
+<td>“This media is great”</td>
+</tr>
+<tr class="row-odd"><td>booktitle</td>
+<td>Book</td>
+<td>Book title</td>
+<td>“Weather and Folk Lore of Peterborough and District”</td>
+</tr>
+<tr class="row-even"><td>publishdate</td>
+<td>Book</td>
+<td>Date book published</td>
+<td>“Tue, 22 Jun 2010 06:54:22 +0100”</td>
+</tr>
+<tr class="row-odd"><td>author</td>
+<td>Book</td>
+<td>Book author</td>
+<td>“Charles Dack”</td>
+</tr>
+<tr class="row-even"><td>pages</td>
+<td>Book</td>
+<td>Number of pages</td>
+<td>“123”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="attribute-example">
+<h3>Attribute Example<a class="headerlink" href="#attribute-example" title="Permalink to this headline">¶</a></h3>
+<p>Example attribute declarations within &lt;item&gt; element:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;2000&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;category&quot;</span> <span class="na">value=</span><span class="s">&quot;2030&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;newznab:attr</span> <span class="na">name=</span><span class="s">&quot;size&quot;</span>     <span class="na">value=</span><span class="s">&quot;4294967295&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="newznab-error-codes">
+<h2>Newznab Error Codes<a class="headerlink" href="#newznab-error-codes" title="Permalink to this headline">¶</a></h2>
+<p>Under normal circumstances i.e. when the HTTP request/response sequence is
+successfully completed Newznab implementations always respond with
+<code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span> <span class="pre">OK</span></code>.  However this doesn’t mean that the query was semantically
+correct. It simply means that the HTTP part of the sequence was successful.
+One then must check the actual response body/data to see if the request was
+completed without errors.</p>
+<p>In case of a Newznab error the response contains an error code and an a
+description of the error.</p>
+<p>The error codes have been defined into different ranges. 100-199 Account/user
+credentials specific error codes, 200-299 API call specific error codes,
+300-399 content specific error codes and finally 900-999 Other error codes.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Error code</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>100</td>
+<td>Incorrect user credentials</td>
+</tr>
+<tr class="row-odd"><td>101</td>
+<td>Account suspended</td>
+</tr>
+<tr class="row-even"><td>102</td>
+<td>Insufficient privileges/not authorized</td>
+</tr>
+<tr class="row-odd"><td>103</td>
+<td>Registration denied</td>
+</tr>
+<tr class="row-even"><td>104</td>
+<td>Registrations are closed</td>
+</tr>
+<tr class="row-odd"><td>105</td>
+<td>Invalid registration (Email Address Taken)</td>
+</tr>
+<tr class="row-even"><td>106</td>
+<td>Invalid registration (Email Address Bad Format)</td>
+</tr>
+<tr class="row-odd"><td>107</td>
+<td>Registration Failed (Data error)</td>
+</tr>
+<tr class="row-even"><td>200</td>
+<td>Missing parameter</td>
+</tr>
+<tr class="row-odd"><td>201</td>
+<td>Incorrect parameter</td>
+</tr>
+<tr class="row-even"><td>202</td>
+<td>No such function. (Function not defined in this
+specification).</td>
+</tr>
+<tr class="row-odd"><td>203</td>
+<td>Function not available. (Optional function is not
+implemented).</td>
+</tr>
+<tr class="row-even"><td>300</td>
+<td>No such item.</td>
+</tr>
+<tr class="row-odd"><td>300</td>
+<td>Item already exists.</td>
+</tr>
+<tr class="row-even"><td>900</td>
+<td>Unknown error</td>
+</tr>
+<tr class="row-odd"><td>910</td>
+<td>API Disabled</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="error-code-example">
+<h3>Error code example<a class="headerlink" href="#error-code-example" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Query could not be completed because user credentials are broken</p>
+<blockquote>
+<div><p><strong>Request</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">http://servername.com/api?t=details&amp;apikey=xxxxx&amp;guid=xxxxxxxxx</span></code></p>
+</div></blockquote>
+<p><strong>Response</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</div></blockquote>
+<p><strong>Content</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;error</span> <span class="na">code=</span><span class="s">&quot;100&quot;</span> <span class="na">description=</span><span class="s">&quot;Incorrect user credentials&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="External References" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Taloth Saldono.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3-alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

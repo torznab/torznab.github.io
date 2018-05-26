@@ -1,0 +1,146 @@
+.. highlight:: xml
+
+v1.0 - Torznab Torrent Support
+==============================
+
+:Status:       **Adopted** |torznab|
+:Date:         March 2015
+:Attributions: - jonnyboy *(hdaccess/hd4free)*
+               - Taloth Saldono *(Sonarr)*
+               - zone117x *(Jackett)*
+
+Summary
+-------
+
+
+Generic Changes
+---------------
+
+.. container:: longlist
+
+   #) Services providing torrents should use an RSS `enclosure` with a link to the torrent file or magnet uri.
+
+      .. example::
+
+         .. code-block:: xml
+
+            <enclosure url="https://yoursite.com/download.php?torrent=123&passkey=123456" 
+                       length="1460985071"
+                       type="application/x-bittorrent" />
+                       
+         .. code-block:: xml
+
+            <enclosure url="magnet:?xt=urn:btih:c12fe1c06bba254a9dc9f519b335aa7c1367a88a&dn" 
+                       length="1460985071"
+                       type="application/x-bittorrent;x-scheme-handler/magnet" />
+
+      The torrent download url |MUST| not rely on any additional authentication mechanisms.
+
+      The enclosure type |MUST| be `application/x-bittorrent` *or* `application/x-bittorrent;x-scheme-handler/magnet`.
+
+      Multiple enclosures |MAY| be provided, clients |SHOULD| select the preferred enclosure.
+
+      The correct definition of the enclosure `length` attribute should have been the size of the .torrent file, however newznab defined it as the length of the usenet download rather than the .nzb size. |br|
+      Therefore the `length` attribute can be either 0, or the .torrent/.nzb file size, or the actual media size.
+      Given this ambiguity, services |SHOULD| instead provide the `size` extended attribute with the size of the media. (eg. :xml:`<torznab:attr name="size" value="1460985071" />`)
+
+   #) Services |MAY| include additional extended attributes in the results:
+   
+      .. table:: Generic extended attributes
+         :class: small
+
+         ===============  =======  ========  =============
+         name             type     default   description
+         ===============  =======  ========  =============
+         infohash         string   *none*    Torrent infohash as lower-case hexadecimal string.
+         magneturl        url      *none*    Magnet uri.
+         ===============  =======  ========  =============
+
+.. This was in the original specification as used by hdaccess but isn't particularly useful.
+..         type             string   *none*    Which type of media the item was identified. |br|
+                                             Known values are: `series`, `movie`, `music`, `book`. Omit if unknown.
+
+Tracker Statistics
+------------------
+
+.. container:: longlist
+
+   Services |MAY| include tracker statistics in the results:
+   
+   .. table:: Tracker statistics extended attributes
+      :class: small
+
+      ===============  =======  ========  =============
+      name             type     default   description
+      ===============  =======  ========  =============
+      seeders          integer  *none*    Number of active seeders according to the tracker(s).
+      leechers         integer  *none*    Number of active leechers (non-seeders) according to the tracker(s).
+      peers            integer  *none*    Number of active peers (seeders and leechers) according to the tracker(s).
+      ===============  =======  ========  =============
+      
+   Services |SHALL| omit attributes for which no information is available.
+
+   If multiple trackers are known, the service |SHOULD| calculate `seeders`, `leechers`, `peers` based on the maximum instead of the sum of the statistics provided by individual trackers, this ensures that peers connected to multiple trackers are only counted once.
+
+Seeding Criteria
+----------------
+
+.. container:: longlist
+
+   Services |MAY| include seeding criteria in the results:
+   
+   .. table:: Seeding criteria extended attributes
+      :class: small
+
+      ===============  =======  ========  =============
+      name             type     default   description
+      ===============  =======  ========  =============
+      seedtype         string   `either`  Specifies which seed criteria must be met. Possible values are: `ratio`, `seedtime`, `both` or `either`.
+      minimumratio     decimal  *none*    Minimum ratio required before the torrent client may stop seeding.
+      minimumseedtime  decimal  *none*    Minimum time in seconds that the torrent must be actively seeded by the client before it may be stopped.
+      ===============  =======  ========  =============
+
+   Private trackers |SHOULD| include `minimumratio` and `minimumseedtime` to specify the seeding requirements for individual torrents. This allow clients to take corrective action or warn the user if the torrent client seeding settings are incorrect.
+
+   Services |SHALL| not include arbitrarily large `minimumratio` and `minimumseedtime` values that do not reflect the trackers actual seeding requirements.
+
+   .. note::
+   
+      These two attributes are included to allow a torrent tracker to specify the seeding requirements on a per torrent basis.
+      
+      These values should be set to the long term requirements for the torrent. So if it's freeleech for a decade you could set `minimumratio` to `0.0`, but if it's only for a day, keep it at `1.0`.
+      
+      The idea is that if one of the two criteria is satisfied, the torrent client can put the torrent at a lower priority or stop seeding entirely.
+
+Categories
+----------
+
+Torrent trackers usually have existing categories for their RSS feeds, often starting at `1`, howerver these categories conflict with the default categories defined by newznab. |br|
+newznab defines categories starting at `100000` as custom site-specific categories. Therefore services |SHOULD| map their internal categories to that range.
+
+Additionally services |SHOULD| attempt to map any of the site-specific categories to the defaut list of categories defined by newznab. For example `5040` for HD TV releases.
+
+Client Changes
+--------------
+
+.. container:: longlist
+
+   #) If any two of the three `seeders`, `leechers` and `peers` attributes is provided, clients |SHOULD| automatically infer the value of the missing attribute.
+
+   #) Clients |SHOULD| not use defaults for the `minimumratio` and `minimumseedtime` attributes unless they reflect the formal seeding requirements by the tracker.
+
+      Clients |MAY| use the seeding criteria attributes to override a torrent client settings, but only if the criteria exceed the user's preselected values. Users |SHOULD| be able to disable this behavior.
+
+Conclusions
+-----------
+
+With a few adjustments, the basic newznab api specification can be used for torrent support. The additional extended attributes should provide clients with enough tracker specific information to properly select releases.
+
+Many private trackers do not parser release titles and do not index season and episode numbers, this makes the `season`, `ep` and `*id` query parameters less effective. However, the indexer can effectively combine the clients `q`, `season` and `ep` query parameters to support the `S01E01` and `1x01` formats without additional api calls. How accurate the results are thus depends mostly on the service implementation.
+
+Adoption
+--------
+
+Torznab was first implemented for usage with HDAccess (now defunct) and later with HD4Free. It's also used by Jackett and Cardigan to expose numerous trackers that do not have an api.
+
+*This revision was documented in 2017 to keep a historical record.*

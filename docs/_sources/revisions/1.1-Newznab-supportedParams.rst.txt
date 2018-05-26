@@ -1,0 +1,103 @@
+v1.1 - Newznab supportedParams
+==============================
+
+:Status:       **Adopted** |newznab| |torznab|
+:Date:         October 2015
+:Attributions: - bb *(newznab)*
+               - Taloth Saldono *(Sonarr)*
+               - zoggy
+
+Summary
+-------
+
+Currently Newznab has no way to specify which query parameters are supported by specific indexers. With the disappearance of TvRage the `rid` is no longer useful and needs to be replaced, blindly assuming indexers use `tvdbid` will lead to compatibility issues.
+
+A `supportedParams` attribute should be added to the capabilities results to indicate which query parameters are supported.
+
+A `tvdbid` query param should be formalized, while preserving `rid`.
+
+In addition services should use an OR operator to process multiple `*id` query parameters, so that the query becomes `if rid=123 OR tvdbid=8000`, allowing clients to specify all ids they know regardless of whether the indexer has them associated.
+
+Service Changes
+---------------
+
+.. container:: longlist
+
+   #) Services |SHOULD| add the `supportedParams` attribute to the `searching` elements in the capabilities result:
+
+      .. example::
+         
+         .. code-block:: xml
+
+            <searching>
+               <search available="yes" supportedParams="q" />
+               <tv-search available="yes" supportedParams="q,rid,tvdbid,season,ep" />
+               <movie-search available="yes" supportedParams="q,imdbid" />
+               <audio-search available="yes" supportedParams="q" />
+               <book-search available="yes" supportedParams="q" />
+            </searching>
+
+      Services |MAY| add additional query parameters to the list, for example `traktid`, `tvmazeid`, `genre`, `group`, `artist`.
+
+      Standard query params such as `cat`, `offset`, `limit` etc |MUST| not be included since these are implied by the specification.
+
+   #) Services not supporting `q`, `rid`, `season` or `ep` |SHALL| return an empty result if any of the query parameters is provided by the client.
+
+      This is to ensure backward compatible behavior with clients unware of the `supportedParams` attribute.
+
+   #) Services |MAY| support the extended attribute `tvdbid` or `tvmazeid`:
+
+      .. table:: New extended attributes
+         :class: small
+
+         ========  =======  =======  =============
+         name      type     default  description
+         ========  =======  =======  =============
+         tvdbid    integer  *none*   TheTVDB show id associated with this release.
+         tvmazeid  integer  *none*   TVMaze show id associated with this release.
+         ========  =======  =======  =============
+
+      If supported, these attributes |SHOULD| be queryable via tv-search query parameters `tvdbid` and `tvmazeid` respectively.
+
+Client Changes
+--------------
+
+.. container:: longlist
+
+   #) Clients |SHALL| assume the following values if `supportedParams` is not supplied:
+
+      .. table:: supportedParams defaults
+         :class: small center
+
+         ============   =======================
+         element        default supportedParams
+         ============   =======================
+         search         q
+         tv-search      q,rid,season,ep
+         movie-search   q,imdbid
+         audio-search   q
+         book-search    q
+         ============   =======================
+
+      The tv-search mimics the original newznab specification before `supportedParams` was known and ensures backward compatibility with old service implementations.
+
+   #) Clients |SHALL| parse the `supportedParams` attribute to determine which query parameters are available and only query
+
+   #) Clients |SHALL| only submit multiple `*id` parameters if the `supportedParams` is present, for other services the client |SHOULD| use separate api calls.
+
+Conclusions
+-----------
+
+The proposed changes will ensure that each indexer can specify which query parameters it supports. This allows clients to automatically handle both basic and advanced/customized indexers properly.
+
+The new OR operator for the id-based search allows clients to submit *all* different ids simultaneously and reduce the number of api calls needed.
+
+Adoption
+--------
+
+These changes were integrated in the Newznab codebase in late 2015 and is used by most newznab indexers.
+
+The changes have also been adopted by nZEDb and Torznab.
+
+*This revision was documented in 2017 to keep a historical record.*
+

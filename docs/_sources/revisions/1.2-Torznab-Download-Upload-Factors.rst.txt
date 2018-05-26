@@ -1,0 +1,64 @@
+v1.2 - Torznab Download/Upload Factors
+======================================
+
+:Status:       **Adopted** |torznab|
+:Date:         September 2016
+:Attributions: - kaso17
+
+Summary
+-------
+
+Torznab currently specifies `minimumratio` and `minimumseedtime` to specify to clients how long the release must be seeded.
+However, these attributes are not useful for prioritisation of free/neutral leech releases.
+Therefore this proposal introduces `downloadvolumefactor` and `uploadvolumefactor` as optional extended attributes.
+
+Download/Upload Credits
+-----------------------
+
+Many private trackers track the total amount of data a user downloads and uploads, these global 'credits' are used to determine global ratio and influences the perks available to the user such as promotions.
+Certain types of torrents are given bonuses to how much the torrent activity contributes to the user account.
+
+Add the following extended attributes:
+
+.. table::
+   :class: small
+   
+   ====================   =======  =======   =========================================================
+   name                   type     default   description
+   ====================   =======  =======   =========================================================
+   downloadvolumefactor   decimal  1.0       Multiplier for the download volume that counts toward the
+                                             user's account on the tracker. Freeleech would be `0.0`.
+   uploadvolumefactor     decimal  1.0       Multiplier for the upload volume that counts toward the
+                                             user's account on the tracker.
+   ====================   =======  =======   =========================================================
+
+Many trackers have certain bonuses for internal releases, such as 'freeleech' (`downloadvolumefactor` = `0`) or 2x upload bonus (`uploadvolumefactor` = `2.0`).
+These generic attributes will allow indexers to properly specify what applies for each individual release.
+
+Clients |SHALL| parse the value as decimal number using the period (`.`) as optional decimal separator.
+
+Clients |SHALL| validate the value of the attributes and reject negative or extreme values.
+
+Example
+-------
+
+A tracker has a release that by their rules must be seeded for 24 hours, or 1:1 ratio, whichever comes first. |br|
+It is an internal release and as such gets a 2x upload bonus. |br|
+The release in the api result will have the following attributes:
+
+.. code-block:: xml
+
+   <torznab:attr name="minimumratio" value="1.0" />
+   <torznab:attr name="minimumseedtime" value="86400" />
+   <torznab:attr name="downloadvolumefactor" value="1.0" />
+   <torznab:attr name="uploadvolumefactor" value="2.0" />
+
+`minimumratio` is still `1.0` since the upload bonus usually applies to the users global upload and ratio, not the individual torrent.
+If the tracker makes the upload bonus count toward the torrent individual ratio, then `minimumratio` would be `0.5`.
+
+Adoption
+--------
+
+Added to the xsd schema.
+
+*This revision was documented in 2017 to keep a historical record.*
