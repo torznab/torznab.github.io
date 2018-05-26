@@ -390,63 +390,49 @@ The <span class="flag">torznab</span> tag indicates functionality specific to To
 <h3>Caps Format<a class="headerlink" href="#caps-format" title="Permalink to this headline">¶</a></h3>
 <div class="admonition example">
 <p class="first admonition-title">Example</p>
-<div class="highlight-xml"><div class="highlight"><pre><span></span>
+<div class="last highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;caps&gt;</span>
+   <span class="nt">&lt;server</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">title=</span><span class="s">&quot;...&quot;</span> <span class="na">strapline=</span><span class="s">&quot;...&quot;</span>
+         <span class="na">email=</span><span class="s">&quot;...&quot;</span> <span class="na">url=</span><span class="s">&quot;http://indexer.local/&quot;</span>
+         <span class="na">image=</span><span class="s">&quot;http://indexer.local/content/banner.jpg&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;limits</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">default=</span><span class="s">&quot;50&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;retention</span> <span class="na">days=</span><span class="s">&quot;400&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;registration</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">open=</span><span class="s">&quot;yes&quot;</span> <span class="nt">/&gt;</span>
+
+   <span class="nt">&lt;searching&gt;</span>
+      <span class="nt">&lt;search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;tv-search</span> <span class="na">available=</span><span class="s">&quot;yes&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q,rid,tvdbid,season,ep&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;movie-search</span> <span class="na">available=</span><span class="s">&quot;no&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q,imdbid,genre&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;audio-search</span> <span class="na">available=</span><span class="s">&quot;no&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;book-search</span> <span class="na">available=</span><span class="s">&quot;no&quot;</span> <span class="na">supportedParams=</span><span class="s">&quot;q&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/searching&gt;</span>
+
+   <span class="nt">&lt;categories&gt;</span>
+      <span class="nt">&lt;category</span> <span class="na">id=</span><span class="s">&quot;2000&quot;</span> <span class="na">name=</span><span class="s">&quot;Movies&quot;</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;2010&quot;</span> <span class="na">name=</span><span class="s">&quot;Foreign&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/category&gt;</span>
+      <span class="nt">&lt;category</span> <span class="na">id=</span><span class="s">&quot;5000&quot;</span> <span class="na">name=</span><span class="s">&quot;TV&quot;</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;5040&quot;</span> <span class="na">name=</span><span class="s">&quot;HD&quot;</span> <span class="nt">/&gt;</span>
+         <span class="nt">&lt;subcat</span> <span class="na">id=</span><span class="s">&quot;5070&quot;</span> <span class="na">name=</span><span class="s">&quot;Anime&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/category&gt;</span>
+   <span class="nt">&lt;/categories&gt;</span>
+
+   <span class="nt">&lt;groups&gt;</span>
+      <span class="nt">&lt;group</span> <span class="na">id=</span><span class="s">&quot;1&quot;</span> <span class="na">name=</span><span class="s">&quot;alt.binaries....&quot;</span> <span class="na">description=</span><span class="s">&quot;...&quot;</span> <span class="na">lastupdate=</span><span class="s">&quot;...&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/groups&gt;</span>
+
+   <span class="nt">&lt;genres&gt;</span>
+      <span class="nt">&lt;genre</span> <span class="na">id=</span><span class="s">&quot;1&quot;</span> <span class="na">categoryid=</span><span class="s">&quot;5000&quot;</span> <span class="na">name=</span><span class="s">&quot;Kids&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/genres&gt;</span>
+
+   <span class="nt">&lt;tags&gt;</span>
+      <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;anonymous&quot;</span> <span class="na">description=</span><span class="s">&quot;Uploader is anonymous&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;trusted&quot;</span> <span class="na">description=</span><span class="s">&quot;Uploader has high reputation&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;internal&quot;</span> <span class="na">description=</span><span class="s">&quot;Uploader is an internal release group&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/tags&gt;</span>
+<span class="nt">&lt;/caps&gt;</span>
 </pre></div>
 </div>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;
-&lt;caps&gt;</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>&lt;server version=”1.1” title=”…” strapline=”…”</dt>
-<dd>email=”…” url=”<a class="reference external" href="http://indexer.local/">http://indexer.local/</a>”
-image=”<a class="reference external" href="http://indexer.local/content/banner.jpg">http://indexer.local/content/banner.jpg</a>” /&gt;</dd>
-</dl>
-<p>&lt;limits max=”100” default=”50” /&gt;
-&lt;retention days=”400” /&gt;
-&lt;registration available=”yes” open=”yes” /&gt;</p>
-<dl class="docutils">
-<dt>&lt;searching&gt;</dt>
-<dd>&lt;search available=”yes” supportedParams=”q” /&gt;
-&lt;tv-search available=”yes” supportedParams=”q,rid,tvdbid,season,ep” /&gt;
-&lt;movie-search available=”no” supportedParams=”q,imdbid,genre” /&gt;
-&lt;audio-search available=”no” supportedParams=”q” /&gt;
-&lt;book-search available=”no” supportedParams=”q” /&gt;</dd>
-</dl>
-<p>&lt;/searching&gt;</p>
-<dl class="docutils">
-<dt>&lt;categories&gt;</dt>
-<dd><dl class="first docutils">
-<dt>&lt;category id=”2000” name=”Movies”&gt;</dt>
-<dd>&lt;subcat id=”2010” name=”Foreign” /&gt;</dd>
-</dl>
-<p>&lt;/category&gt;
-&lt;category id=”5000” name=”TV”&gt;</p>
-<blockquote>
-<div>&lt;subcat id=”5040” name=”HD” /&gt;
-&lt;subcat id=”5070” name=”Anime” /&gt;</div></blockquote>
-<p class="last">&lt;/category&gt;</p>
-</dd>
-</dl>
-<p>&lt;/categories&gt;</p>
-<dl class="docutils">
-<dt>&lt;groups&gt;</dt>
-<dd>&lt;group id=”1” name=”alt.binaries….” description=”…” lastupdate=”…” /&gt;</dd>
-</dl>
-<p>&lt;/groups&gt;</p>
-<dl class="docutils">
-<dt>&lt;genres&gt;</dt>
-<dd>&lt;genre id=”1” categoryid=”5000” name=”Kids” /&gt;</dd>
-</dl>
-<p>&lt;/genres&gt;</p>
-<dl class="docutils">
-<dt>&lt;tags&gt;</dt>
-<dd>&lt;tag name=”anonymous” description=”Uploader is anonymous” /&gt;
-&lt;tag name=”trusted” description=”Uploader has high reputation” /&gt;
-&lt;tag name=”internal” description=”Uploader is an internal release group” /&gt;</dd>
-</dl>
-<p>&lt;/tags&gt;</p>
-</div></blockquote>
-<p class="last">&lt;/caps&gt;</p>
 </div>
 <table border="1" class="docutils">
 <colgroup>
