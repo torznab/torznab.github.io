@@ -1,0 +1,89 @@
+v1.4 - Newznab Actual Api Limits
+================================
+
+:Status:       **Draft** |newznab| |torznab|
+:Date:         November 2019
+:Attributions: - bb *(newznab)*
+               - DariusIII *(nntmux/nzedb)*
+               - Taloth Saldono *(Sonarr)*
+
+Summary
+-------
+
+Currently users can only determine their current api and grab limits and usage in their profile page.
+This revision introduces an additional element in the api response to provide this information to clients directly,
+allowing them to rate limit their api calls.
+
+Actual Api Limits
+-----------------
+
+Add a `newznab:apilimits` element to the api response.
+
+.. example::
+
+   .. code-block:: xml
+  
+      <?xml version="1.0" encoding="UTF-8"?>
+      <rss>
+         <channel>
+            ...
+            <newznab:response offset="0" total="10000" />
+            <newznab:apilimits apiCurrent="3" apiMax="100" />
+            ...
+         </channel>
+      </rss>
+
+Clients |SHOULD| not assume the `apilimits` element or any of it's attributes to be present in the api response.
+
+Servers |MAY| include the `apilimits` element if the server has api/grab limits.
+
+The `apilimits` element may contain the following attributes:
+
+.. table::
+   :class: small
+   
+   ====================   =======  =======   =========================================================
+   name                   type     default   description
+   ====================   =======  =======   =========================================================
+   apiCurrent             number   0         The number of api calls that have been exhaused in the last 24 hours
+   apiMax                 number   ∞         The number of api calls that may be used in a 24 hours
+   grabCurrent            number   0         The number of grabs that have been used in the last 24 hours
+   grabMax                number   ∞         The number of grabs that may be used in a 24 hours
+   apiNextAvailable       string             UTC Timestamp specifying the time at which apiCurrent will be decremented
+   grabNextAvailable      string             UTC Timestamp specifying the time at which grabCurrent will be decremented
+   ====================   =======  =======   =========================================================
+
+Clients |SHOULD| not make further api calls if the `apiCurrent` is equal or greater than `apiMax` until a reasonable time has passed.
+'Reasonable time' becomes the time specified by `apiNextAvailable` if it's provided.
+
+Servers |SHOULD| provide the `apiCurrent`, `apiMax`, `grabCurrent` and `grabMax` attributes when any such limit exists.
+
+Servers |SHOULD| return values matching the state after the current api call has been completed.
+
+Servers |MAY| provide the `apiNextAvailable` and `grabNextAvailable` attributes.
+
+.. note::
+
+   Servers should avoid including attributes that require additional database lookups to avoid an increase in the server's load.
+   However, the `apiCurrent` and `apiMax` attributes are quite beneficial to clients and should be included whenever possible.
+   
+   It's likely possible to refactor the sql queries to provide the desired information in a single db query.
+
+.. TODO:: Incomplete
+
+Example
+-------
+
+A client has almost reached the api limit, a query at 2019-07-16 11:56 UTC returns:
+
+.. code-block:: xml
+
+   <newznab:apilimits apiCurrent="90" apiMax="100" grabCurrent="5" grabMax="5" apiNextAvailable="Tue, 16 Jul 2019 20:56:54 +0000" />
+
+The client only has 10 api calls left in the next 8 hours, so should limit itself to one api call (rss) per hour.
+This means that the client has exhausted all available grabs, it is unknown at which a new grab becomes available, but a future api call will show when it does.
+
+Adoption
+--------
+
+These changes were discussed with the newznab staff in mid 2019, but may take some time to be in use by indexers.
